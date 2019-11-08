@@ -1,23 +1,18 @@
 plugins {
     id 'java'
 
-    apply plugin: 'jacoco'
+    id 'checkstyle'
 
-    jacocoTestReport {
-        reports {
-            xml.enabled = true
-            html.enabled = true
-        }
-    }
-
-    check.dependsOn jacocoTestReport
+    id 'jacoco'
 }
-
-
 
 version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
+
+checkstyle {
+    toolVersion '8.17';
+}
 
 repositories {
     mavenCentral()
@@ -26,4 +21,11 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
 }
