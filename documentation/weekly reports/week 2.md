@@ -6,6 +6,6 @@ Started to make game logic and user input added. 5 hours
 
 Made first test for part of the game logic. 1 hour.
 
-Also started Javadoc in some parts of the code.
+Also started Javadoc in some parts of the code. 1 hour.
 
-Total time 8 hours.
+Total time 7 hours.
