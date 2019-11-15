@@ -1,6 +1,7 @@
-package chess;
+package chess.move;
 
 import chess.Board;
+import chess.move.MoveValidator;
 
 public class MoveGenerator {
     public Board board;

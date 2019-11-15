@@ -1,4 +1,7 @@
-package chess;
+package chess.move;
+
+import chess.Board;
+import chess.move.MoveValidator;
 
 /**
  *
@@ -7,14 +10,21 @@ public class Move {
     public MoveValidator validator = new MoveValidator();
     public int[] move;
 
+    public Move(){
+    }
+
+    public Move(int[] move){
+        this.move = move;
+    }
+
     /**
      * Given a move does it if it is valid.
      * @param playerMove move as String
      * @return True if the move was made
      */
-    public Boolean playerMakeMove(String playerMove, Board board){
+    public Boolean playerMove(String playerMove, Board board){
         parseMove(playerMove);
-        if (this.validator.isMoveValid(move, board)){
+        if (this.validator.isValidMove(this, board)){
             int[][] gameboard = board.getBoard();
             gameboard[move[3]][move[2]] = gameboard[move[1]][move[0]];
             gameboard[move[1]][move[0]] = 0;
@@ -47,6 +57,10 @@ public class Move {
         move[3] = 7 - move[3];
         this.move = move;
         return true;
+    }
+
+    public int[] getMove(){
+        return move;
     }
 
 }

@@ -1,5 +1,7 @@
 package chess;
 
+import chess.move.Move;
+
 import java.util.Scanner;
 
 public class Game {
@@ -10,7 +12,7 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         while (true){
             System.out.println(board);
-            mover.playerMakeMove(scanner.next(), board);
+            mover.playerMove(scanner.next(), board);
         }
 
     }
