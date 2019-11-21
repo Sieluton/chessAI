@@ -1,9 +1,10 @@
 package chess.move;
 
 import chess.Board;
+import chess.move.rules.PawnRules;
 
 public class MoveValidator {
-    private PawnRules pawnRules = new PawnRules();
+    public PawnRules pawnRules = new PawnRules();
 
     public Boolean isValidMove(Move move, Board board){
         if (Math.abs(board.getBoard()[move.getMove()[1]][move.getMove()[0]]) == 1){

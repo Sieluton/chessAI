@@ -2,6 +2,10 @@ package chess.move;
 
 import chess.Board;
 import chess.move.MoveValidator;
+import chess.move.pieces.PawnMoves;
+import chess.move.rules.PawnRules;
+
+import java.util.Scanner;
 
 /**
  *
@@ -9,8 +13,13 @@ import chess.move.MoveValidator;
 public class Move {
     public MoveValidator validator = new MoveValidator();
     public int[] move;
+    public int promoteTo;
+    public PawnRules pawnrules = new PawnRules();
+    public PawnMoves pawnmoves = new PawnMoves();
 
     public Move(){
+        move = new int[4];
+        promoteTo = 5;
     }
 
     public Move(int[] move){
@@ -24,11 +33,16 @@ public class Move {
      */
     public Boolean playerMove(String playerMove, Board board){
         parseMove(playerMove);
-        if (this.validator.isValidMove(this, board)){
-            int[][] gameboard = board.getBoard();
-            gameboard[move[3]][move[2]] = gameboard[move[1]][move[0]];
-            gameboard[move[1]][move[0]] = 0;
-            board.setBoard(gameboard);
+        // remove enpassant, might move later
+        board.removeEnPassant();
+        if (validator.isPawnMove(this, board)){
+            if (pawnrules.enPassantCheck(this, board)) pawnmoves.enPassant(this, board);
+            else if (pawnrules.doubleMoveCheck(this, board)) pawnmoves.doubleMove(this, board);
+            else if (pawnrules.promotionCheck(this, board)){
+                //promotionGet();
+                pawnmoves.promotion(this, board);
+            }
+            else pawnmoves.move(this, board);
             board.setWhitetomove(!board.getWhitetomove());
             return true;
         }
@@ -61,6 +75,28 @@ public class Move {
 
     public int[] getMove(){
         return move;
+    }
+
+    public void setMove(int[] move){
+        this.move = move;
+    }
+
+    public int getPromoteTo(){
+        return promoteTo;
+    }
+
+    public void setPromoteTo(int i){
+        this.promoteTo = i;
+    }
+
+    public void promotionGet(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("This move leads to promotion. Specify with following numbers: Rook = 1, Knight = 2, Bishop = 3, Queen = 4");
+        int i = scanner.nextInt();
+        if (i == 1) promoteTo = 2;
+        else if (i == 2) promoteTo = 3;
+        else if (i == 3) promoteTo = 4;
+        else promoteTo = 5;
     }
 
 }

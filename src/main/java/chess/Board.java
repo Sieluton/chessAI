@@ -4,6 +4,7 @@ public class Board {
 
     public int[][] board;
     public Boolean whitetomove;
+    public int enpassant = 0;
 
     public Board(){
         this.board = new int[8][8];
@@ -52,6 +53,14 @@ public class Board {
         this.whitetomove = whitetomove;
     }
 
+    public int getEnpassant(){
+        return enpassant;
+    }
+
+    public void setEnpassant(int enpassant){
+        this.enpassant = enpassant;
+    }
+
     public String toString(){
         String boardstring = "   A  B  C  D  E  F  G  H";
         for (int i = 0; i < this.board.length; i++){
@@ -70,8 +79,31 @@ public class Board {
                 if (this.board[i][j] == -4) boardstring += " b ";
                 if (this.board[i][j] == -5) boardstring += " q ";
                 if (this.board[i][j] == -6) boardstring += " k ";
+                //en passant testing
+                if (this.board[i][j] == 7) boardstring += " + ";
+                if (this.board[i][j] == -7) boardstring += " - ";
             }
         }
         return boardstring;
+    }
+
+    /**
+     * Removes moving players en passant marks from the board when called.
+     * This should happen at the start of every move as by the rules.
+     */
+    public void removeEnPassant(){
+        //if (enpassant == 0) return;
+        for (int i = 0; i < board.length; i++){
+            for (int j = 0; j < board.length; j++){
+                if (board[i][j] == -7 && whitetomove){
+                    board[i][j] = 0;
+                    enpassant--;
+                }
+                else if (board[i][j] == 7 && !whitetomove){
+                    board[i][j] = 0;
+                    enpassant--;
+                }
+            }
+        }
     }
 }

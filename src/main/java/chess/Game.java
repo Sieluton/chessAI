@@ -12,7 +12,9 @@ public class Game {
         Scanner scanner = new Scanner(System.in);
         while (true){
             System.out.println(board);
-            mover.playerMove(scanner.next(), board);
+            String nextmove = scanner.next();
+            mover.playerMove(nextmove, board);
+
         }
 
     }
