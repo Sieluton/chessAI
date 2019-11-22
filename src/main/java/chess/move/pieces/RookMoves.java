@@ -2,15 +2,11 @@ package chess.move.pieces;
 
 import chess.Board;
 import chess.move.Move;
-import chess.move.rules.RookRules;
 
 public class RookMoves {
-    public RookRules rookrules = new RookRules();
 
     public void makeMove(Move move, Board board){
-        if (rookrules.moveCheck(move, board)){
-            move(move, board);
-        }
+        move(move, board);
         board.setWhitetomove(!board.getWhitetomove());
     }
 

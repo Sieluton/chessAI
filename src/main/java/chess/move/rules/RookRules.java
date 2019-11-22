@@ -27,7 +27,7 @@ public class RookRules {
     }
 
     public boolean noPieceIsBlocking(Move move, Board board){
-        int i, j = 0; // used to check squares between
+        int i, j; // used to check squares between
         boolean axis; // value true means x-axis and false y-axis
         if (move.getMove()[1] < move.getMove()[3]){
             i = move.getMove()[1];
@@ -50,7 +50,7 @@ public class RookRules {
             axis = true;
         }
         else return false; // in case something goes wrong
-        for (i += 1; i < j; i++){ // loop over all squares the rook moves over and check if they are empty
+        for (i++; i < j; i++){ // loop over all squares the rook moves over and check if they are empty
             if (axis && board.getBoard()[move.getMove()[1]][i] != 0) return false;
             else if (!axis && board.getBoard()[i][move.getMove()[0]] != 0) return false;
         }

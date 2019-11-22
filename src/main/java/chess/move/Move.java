@@ -2,13 +2,12 @@ package chess.move;
 
 import chess.Board;
 import chess.move.MoveValidator;
-import chess.move.pieces.PawnMoves;
-import chess.move.pieces.RookMoves;
+import chess.move.pieces.*;
 
 import java.util.Scanner;
 
 /**
- *
+ * Handles the parsing of moves and passing them to correct methods
  */
 public class Move {
     public MoveValidator validator = new MoveValidator();
@@ -16,6 +15,10 @@ public class Move {
     public int promoteTo;
     public PawnMoves pawnmoves = new PawnMoves();
     public RookMoves rookmoves = new RookMoves();
+    public KnightMoves knightmoves = new KnightMoves();
+    public BishopMoves bishopmoves = new BishopMoves();
+    public QueenMoves queenmoves = new QueenMoves();
+    public KingMoves kingmoves = new KingMoves();
 
     public Move(){
         move = new int[4];
@@ -27,7 +30,7 @@ public class Move {
     }
 
     /**
-     * Given a move does it if it is valid.
+     * Given a move passes it to right method to handle.
      * @param playerMove move as String
      * @return True if the move was made
      */
@@ -40,6 +43,22 @@ public class Move {
         }
         else if (validator.isRookMove(this, board)){
             rookmoves.makeMove(this, board);
+            return true;
+        }
+        else if (validator.isKnightMove(this, board)){
+            knightmoves.makeMove(this, board);
+            return true;
+        }
+        else if (validator.isBishopMove(this, board)){
+            bishopmoves.makeMove(this, board);
+            return true;
+        }
+        else if (validator.isQueenMove(this, board)){
+            queenmoves.makeMove(this, board);
+            return true;
+        }
+        else if (validator.isKingMove(this, board)){
+            kingmoves.makeMove(this, board);
             return true;
         }
         return false;
@@ -94,5 +113,4 @@ public class Move {
         else if (i == 3) promoteTo = 4;
         else promoteTo = 5;
     }
-
 }
