@@ -3,7 +3,7 @@ package chess;
 public class Board {
 
     public int[][] board;
-    public Boolean whitetomove;
+    public boolean whitetomove;
     public int enpassant = 0;
 
     public Board(){
@@ -32,7 +32,7 @@ public class Board {
         this.whitetomove = true;
     }
 
-    public Board(int[][] board, Boolean whitenext){
+    public Board(int[][] board, boolean whitenext){
         this.board = board;
         this.whitetomove = whitenext;
     }
@@ -45,11 +45,11 @@ public class Board {
         this.board = board;
     }
 
-    public Boolean getWhitetomove(){
+    public boolean getWhitetomove(){
         return this.whitetomove;
     }
 
-    public void setWhitetomove(Boolean whitetomove){
+    public void setWhitetomove(boolean whitetomove){
         this.whitetomove = whitetomove;
     }
 

@@ -3,7 +3,7 @@ package chess.move;
 import chess.Board;
 import chess.move.MoveValidator;
 import chess.move.pieces.PawnMoves;
-import chess.move.rules.PawnRules;
+import chess.move.pieces.RookMoves;
 
 import java.util.Scanner;
 
@@ -14,8 +14,8 @@ public class Move {
     public MoveValidator validator = new MoveValidator();
     public int[] move;
     public int promoteTo;
-    public PawnRules pawnrules = new PawnRules();
     public PawnMoves pawnmoves = new PawnMoves();
+    public RookMoves rookmoves = new RookMoves();
 
     public Move(){
         move = new int[4];
@@ -31,19 +31,15 @@ public class Move {
      * @param playerMove move as String
      * @return True if the move was made
      */
-    public Boolean playerMove(String playerMove, Board board){
+    public boolean playerMove(String playerMove, Board board){
         parseMove(playerMove);
-        // remove enpassant, might move later
         board.removeEnPassant();
         if (validator.isPawnMove(this, board)){
-            if (pawnrules.enPassantCheck(this, board)) pawnmoves.enPassant(this, board);
-            else if (pawnrules.doubleMoveCheck(this, board)) pawnmoves.doubleMove(this, board);
-            else if (pawnrules.promotionCheck(this, board)){
-                //promotionGet();
-                pawnmoves.promotion(this, board);
-            }
-            else pawnmoves.move(this, board);
-            board.setWhitetomove(!board.getWhitetomove());
+            pawnmoves.makeMove(this, board);
+            return true;
+        }
+        else if (validator.isRookMove(this, board)){
+            rookmoves.makeMove(this, board);
             return true;
         }
         return false;
@@ -54,7 +50,7 @@ public class Move {
      * @param playerMove move as string
      * @return Parsed move as array
      */
-    public Boolean parseMove(String playerMove){
+    public boolean parseMove(String playerMove){
         if (playerMove.length() > 4) return false;
         int[] move = new int[4];
         for (int i = 0; i < move.length; i++){

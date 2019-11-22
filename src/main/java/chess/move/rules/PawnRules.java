@@ -11,8 +11,10 @@ public class PawnRules {
      * @param board current game state
      * @return true if it is valid move for pawn
      */
-    public boolean isValidPawnMove(Move move, Board board){
-        if (takeCheck(move, board) || moveCheck(move, board) || doubleMoveCheck(move, board))
+    public boolean isValidMove(Move move, Board board){
+        if (takeCheck(move, board) ||
+                moveCheck(move, board) ||
+                doubleMoveCheck(move, board))
             return true;
         return false;
     }
@@ -25,11 +27,13 @@ public class PawnRules {
      */
     public boolean enPassantCheck(Move move, Board board){
         if (board.getWhitetomove()){
-            if (takeCheck(move, board) && board.getBoard()[move.getMove()[3]][move.getMove()[2]] == 7)
+            if (takeCheck(move, board) &&
+                    board.getBoard()[move.getMove()[3]][move.getMove()[2]] == 7)
                 return true;
         }
         else {
-            if (takeCheck(move, board) && board.getBoard()[move.getMove()[3]][move.getMove()[2]] == -7)
+            if (takeCheck(move, board) &&
+                    board.getBoard()[move.getMove()[3]][move.getMove()[2]] == -7)
                 return true;
         }
         return false;
@@ -43,11 +47,11 @@ public class PawnRules {
      */
     public boolean promotionCheck(Move move, Board board){
         if (board.getWhitetomove()){
-            if (isValidPawnMove(move, board) && move.getMove()[3] == 0)
+            if (isValidMove(move, board) && move.getMove()[3] == 0)
                 return true;
         }
         else {
-            if (isValidPawnMove(move, board) && move.getMove()[3] == 7)
+            if (isValidMove(move, board) && move.getMove()[3] == 7)
                 return true;
         }
         return false;
@@ -61,13 +65,15 @@ public class PawnRules {
      */
     public boolean moveCheck(Move move, Board board){
         if (board.getWhitetomove()){
-            if (move.getMove()[1] - move.getMove()[3] == 1 && move.getMove()[0] == move.getMove()[2] &&
+            if (move.getMove()[1] - move.getMove()[3] == 1 &&
+                    move.getMove()[0] == move.getMove()[2] &&
                     board.getBoard()[move.getMove()[3]][move.getMove()[2]] == 0 &&
                     board.getBoard()[move.getMove()[1]][move.getMove()[0]] == -1)
                 return true;
         }
         else {
-            if (move.getMove()[1] - move.getMove()[3] == -1 && move.getMove()[0] == move.getMove()[2] &&
+            if (move.getMove()[1] - move.getMove()[3] == -1 &&
+                    move.getMove()[0] == move.getMove()[2] &&
                     board.getBoard()[move.getMove()[3]][move.getMove()[2]] == 0 &&
                     board.getBoard()[move.getMove()[1]][move.getMove()[0]] == 1)
                 return true;
@@ -83,16 +89,20 @@ public class PawnRules {
      */
     public boolean doubleMoveCheck(Move move, Board board){
         if (board.getWhitetomove()){
-            if (move.getMove()[1] - move.getMove()[3] == 2 && move.getMove()[0] == move.getMove()[2] &&
+            if (move.getMove()[1] - move.getMove()[3] == 2 &&
+                    move.getMove()[0] == move.getMove()[2] &&
                     board.getBoard()[move.getMove()[3]][move.getMove()[2]] == 0 &&
-                    board.getBoard()[move.getMove()[3]+1][move.getMove()[2]] == 0 && move.getMove()[1] == 6 &&
+                    board.getBoard()[move.getMove()[3]+1][move.getMove()[2]] == 0 &&
+                    move.getMove()[1] == 6 &&
                     board.getBoard()[move.getMove()[1]][move.getMove()[0]] == -1)
                 return true;
         }
         else {
-            if (move.getMove()[1] - move.getMove()[3] == -2 && move.getMove()[0] == move.getMove()[2] &&
+            if (move.getMove()[1] - move.getMove()[3] == -2 &&
+                    move.getMove()[0] == move.getMove()[2] &&
                     board.getBoard()[move.getMove()[3]][move.getMove()[2]] == 0 &&
-                    board.getBoard()[move.getMove()[3]-1][move.getMove()[2]] == 0 && move.getMove()[1] == 1 &&
+                    board.getBoard()[move.getMove()[3]-1][move.getMove()[2]] == 0 &&
+                    move.getMove()[1] == 1 &&
                     board.getBoard()[move.getMove()[1]][move.getMove()[0]] == 1)
                 return true;
         }
@@ -108,14 +118,16 @@ public class PawnRules {
     public boolean takeCheck(Move move, Board board){
         if (board.getWhitetomove()){
             if (move.getMove()[1] - move.getMove()[3] == 1 &&
-                    (move.getMove()[0] - move.getMove()[2] == 1 || move.getMove()[0] - move.getMove()[2] == -1) &&
+                    (move.getMove()[0] - move.getMove()[2] == 1 ||
+                            move.getMove()[0] - move.getMove()[2] == -1) &&
                     board.getBoard()[move.getMove()[3]][move.getMove()[2]] >= 1 &&
                     board.getBoard()[move.getMove()[1]][move.getMove()[0]] == -1)
                 return true;
         }
         else {
             if (move.getMove()[1] - move.getMove()[3] == -1 &&
-                    (move.getMove()[0] - move.getMove()[2] == 1 || move.getMove()[0] - move.getMove()[2] == -1) &&
+                    (move.getMove()[0] - move.getMove()[2] == 1 ||
+                            move.getMove()[0] - move.getMove()[2] == -1) &&
                     board.getBoard()[move.getMove()[3]][move.getMove()[2]] <= -1 &&
                     board.getBoard()[move.getMove()[1]][move.getMove()[0]] == 1)
                 return true;
