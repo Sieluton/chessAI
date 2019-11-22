@@ -61,6 +61,11 @@ public class Board {
         this.enpassant = enpassant;
     }
 
+    /**
+     * To print out the board in a nice looking way.
+     * Capital letters are black pieces and non-capital letters are white pieces
+     * @return Boards as a string
+     */
     public String toString(){
         String boardstring = "   A  B  C  D  E  F  G  H";
         for (int i = 0; i < this.board.length; i++){
@@ -79,9 +84,6 @@ public class Board {
                 if (this.board[i][j] == -4) boardstring += " b ";
                 if (this.board[i][j] == -5) boardstring += " q ";
                 if (this.board[i][j] == -6) boardstring += " k ";
-                //en passant testing
-                if (this.board[i][j] == 7) boardstring += " + ";
-                if (this.board[i][j] == -7) boardstring += " - ";
             }
         }
         return boardstring;
@@ -89,21 +91,31 @@ public class Board {
 
     /**
      * Removes moving players en passant marks from the board when called.
-     * This should happen at the start of every move as by the rules.
+     * This should be called at the start of every turn to keep en passant working correctly
      */
     public void removeEnPassant(){
-        //if (enpassant == 0) return;
         for (int i = 0; i < board.length; i++){
             for (int j = 0; j < board.length; j++){
-                if (board[i][j] == -7 && whitetomove){
-                    board[i][j] = 0;
-                    enpassant--;
+                //If whites turn then remove his en passant shadow values
+                if (board[i][j] == -7 && //Check does square contain whites en passant shadow value
+                        whitetomove){ //Check is it whites turn
+                    board[i][j] = 0; //Empty this square
+                    enpassant--; //Keeps en passant counter correct
                 }
-                else if (board[i][j] == 7 && !whitetomove){
-                    board[i][j] = 0;
-                    enpassant--;
+                //If blacks turn then remove his en passant shadow values
+                else if (board[i][j] == 7 && //Check does square contain blacks en passant shadow value
+                        !whitetomove){ //Check is it blacks turn
+                    board[i][j] = 0; //Empty this square
+                    enpassant--; //Keeps en passant counter correct
                 }
             }
         }
+    }
+
+    /**
+     * Change which players turn it is
+     */
+    public void changeTurn(){
+        this.whitetomove = !this.whitetomove;
     }
 }

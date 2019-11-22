@@ -35,28 +35,37 @@ public class Move {
      * @return True if the move was made
      */
     public boolean playerMove(String playerMove, Board board){
-        parseMove(playerMove);
-        board.removeEnPassant();
+        //Check that player gives move that wont crash
+        if (!parseMove(playerMove)) return false;
+        else parseMove(playerMove);
+        //If board contains en passant shadow value from last round remove it
+        if (board.getEnpassant() > 0) board.removeEnPassant();
+        //If move is pawn move let pawn mover class handle it
         if (validator.isPawnMove(this, board)){
             pawnmoves.makeMove(this, board);
             return true;
         }
+        //If move is rook move let rook mover class handle it
         else if (validator.isRookMove(this, board)){
             rookmoves.makeMove(this, board);
             return true;
         }
+        //If move is knight move let knight mover class handle it
         else if (validator.isKnightMove(this, board)){
             knightmoves.makeMove(this, board);
             return true;
         }
+        //If move is bishop move let bishop mover class handle it
         else if (validator.isBishopMove(this, board)){
             bishopmoves.makeMove(this, board);
             return true;
         }
+        //If move is queen move let queen mover class handle it
         else if (validator.isQueenMove(this, board)){
             queenmoves.makeMove(this, board);
             return true;
         }
+        //If move is king move let king mover class handle it
         else if (validator.isKingMove(this, board)){
             kingmoves.makeMove(this, board);
             return true;
@@ -70,9 +79,10 @@ public class Move {
      * @return Parsed move as array
      */
     public boolean parseMove(String playerMove){
-        if (playerMove.length() > 4) return false;
+        //Checks if move is < 4 since it would crash
+        if (playerMove.length() < 4) return false;
         int[] move = new int[4];
-        for (int i = 0; i < move.length; i++){
+        for (int i = 0; i < 4; i++){
             if (playerMove.charAt(i) == 'a' || playerMove.charAt(i) == '1' || playerMove.charAt(i) == 'A') move[i] = 0;
             if (playerMove.charAt(i) == 'b' || playerMove.charAt(i) == '2' || playerMove.charAt(i) == 'B') move[i] = 1;
             if (playerMove.charAt(i) == 'c' || playerMove.charAt(i) == '3' || playerMove.charAt(i) == 'C') move[i] = 2;
@@ -82,8 +92,8 @@ public class Move {
             if (playerMove.charAt(i) == 'g' || playerMove.charAt(i) == '7' || playerMove.charAt(i) == 'G') move[i] = 6;
             if (playerMove.charAt(i) == 'h' || playerMove.charAt(i) == '8' || playerMove.charAt(i) == 'H') move[i] = 7;
         }
-        move[1] = 7 - move[1];
-        move[3] = 7 - move[3];
+        move[1] = 7 - move[1]; //Change y-axis of player input to match boards y-axis values
+        move[3] = 7 - move[3]; //Change y-axis of player input to match boards y-axis values
         this.move = move;
         return true;
     }
@@ -104,6 +114,7 @@ public class Move {
         this.promoteTo = i;
     }
 
+    //May get removed later on
     public void promotionGet(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("This move leads to promotion. Specify with following numbers: Rook = 1, Knight = 2, Bishop = 3, Queen = 4");
