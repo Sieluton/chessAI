@@ -6,7 +6,17 @@ import chess.move.Move;
 public class BishopRules {
 
     public boolean isValidMove(Move move, Board board){
-        return moveCheck(move, board);
+        if (board.getWhitetomove() &&
+                board.getBoard()[move.getMove()[1]][move.getMove()[0]] == -4 &&
+                board.getBoard()[move.getMove()[3]][move.getMove()[2]] >= 0){
+            return moveCheck(move, board);
+        }
+        else if (!board.getWhitetomove() &&
+                board.getBoard()[move.getMove()[1]][move.getMove()[0]] == 4 &&
+                board.getBoard()[move.getMove()[3]][move.getMove()[2]] <= 0){
+            return moveCheck(move, board);
+        }
+        return false;
     }
 
     public boolean moveCheck(Move move, Board board){
@@ -16,16 +26,7 @@ public class BishopRules {
         if (b < 0) b *= -1;
         if (a != b) return false;
         if (move.getMove()[0] == move.getMove()[2] || move.getMove()[1] == move.getMove()[3]) return false;
-        if (board.getBoard()[move.getMove()[1]][move.getMove()[0]] == -4 &&
-                board.getWhitetomove() &&
-                noPieceIsBlocking(move, board) &&
-                board.getBoard()[move.getMove()[3]][move.getMove()[2]] >= 0){
-            return true;
-        }
-        else if (board.getBoard()[move.getMove()[1]][move.getMove()[0]] == 4 &&
-                !board.getWhitetomove() &&
-                noPieceIsBlocking(move, board) &&
-                board.getBoard()[move.getMove()[3]][move.getMove()[2]] <= 0){
+        if (noPieceIsBlocking(move, board)){
             return true;
         }
         return false;
