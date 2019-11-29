@@ -17,24 +17,19 @@ public class MoveValidator {
      * @param board Board object that stores game state
      * @return True if given move is valid move for any piece
      */
-    public boolean isValidMove(Move move, Board board){
+    public boolean isValidMove(Move move, Board board) {
         int piece = board.getBoard()[move.getMove()[1]][move.getMove()[0]];
-        if (piece == 1 || piece == -1){
+        if (piece == 1 || piece == -1) {
             return pawnrules.isValidMove(move, board);
-        }
-        else if (piece == 2 || piece == -2){
+        } else if (piece == 2 || piece == -2) {
             return rookrules.isValidMove(move, board);
-        }
-        else if (piece == 3 || piece == -3){
+        } else if (piece == 3 || piece == -3) {
             return knightrules.isValidMove(move, board);
-        }
-        else if (piece == 4 || piece == -4){
+        } else if (piece == 4 || piece == -4) {
             return bishoprules.isValidMove(move, board);
-        }
-        else if (piece == 5 || piece == -5){
+        } else if (piece == 5 || piece == -5) {
             return queenrules.isValidMove(move, board);
-        }
-        else if (piece == 6 || piece == -6){
+        } else if (piece == 6 || piece == -6) {
             return kingrules.isValidMove(move, board);
         }
         return false;
@@ -46,9 +41,9 @@ public class MoveValidator {
      * @param board Board object that stores game state
      * @return True if move is valid pawn move
      */
-    public boolean isPawnMove(Move move, Board board){
+    public boolean isPawnMove(Move move, Board board) {
         int piece = board.getBoard()[move.getMove()[1]][move.getMove()[0]];
-        if (piece == 1 || piece == -1){
+        if (piece == 1 || piece == -1) {
             return pawnrules.isValidMove(move, board);
         }
         return false;
@@ -60,9 +55,9 @@ public class MoveValidator {
      * @param board Board object that stores game state
      * @return True if move is valid rook move
      */
-    public boolean isRookMove(Move move, Board board){
+    public boolean isRookMove(Move move, Board board) {
         int piece = board.getBoard()[move.getMove()[1]][move.getMove()[0]];
-        if (piece == 2 || piece == -2){
+        if (piece == 2 || piece == -2) {
             return rookrules.isValidMove(move, board);
         }
         return false;
@@ -74,9 +69,9 @@ public class MoveValidator {
      * @param board Board object that stores game state
      * @return True if move is valid knight move
      */
-    public boolean isKnightMove(Move move, Board board){
+    public boolean isKnightMove(Move move, Board board) {
         int piece = board.getBoard()[move.getMove()[1]][move.getMove()[0]];
-        if (piece == 3 || piece == -3){
+        if (piece == 3 || piece == -3) {
             return knightrules.isValidMove(move, board);
         }
         return false;
@@ -88,9 +83,9 @@ public class MoveValidator {
      * @param board Board object that stores game state
      * @return True if move is valid bishop move
      */
-    public boolean isBishopMove(Move move, Board board){
+    public boolean isBishopMove(Move move, Board board) {
         int piece = board.getBoard()[move.getMove()[1]][move.getMove()[0]];
-        if (piece == 4 || piece == -4){
+        if (piece == 4 || piece == -4) {
             return bishoprules.isValidMove(move, board);
         }
         return false;
@@ -102,9 +97,9 @@ public class MoveValidator {
      * @param board Board object that stores game state
      * @return True if move is valid queen move
      */
-    public boolean isQueenMove(Move move, Board board){
+    public boolean isQueenMove(Move move, Board board) {
         int piece = board.getBoard()[move.getMove()[1]][move.getMove()[0]];
-        if (piece == 5 || piece == -5){
+        if (piece == 5 || piece == -5) {
             return queenrules.isValidMove(move, board);
         }
         return false;
@@ -116,9 +111,9 @@ public class MoveValidator {
      * @param board Board object that stores game state
      * @return True if move is valid king move
      */
-    public boolean isKingMove(Move move, Board board){
+    public boolean isKingMove(Move move, Board board) {
         int piece = board.getBoard()[move.getMove()[1]][move.getMove()[0]];
-        if (piece == 6 || piece == -6){
+        if (piece == 6 || piece == -6) {
             return kingrules.isValidMove(move, board);
         }
         return false;

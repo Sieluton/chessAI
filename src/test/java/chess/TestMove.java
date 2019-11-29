@@ -7,7 +7,7 @@ import org.junit.Test;
 
 public class TestMove {
     @Test
-    public void testPawnMoves(){
+    public void testPawnMoves() {
         Board board = new Board();
         Move move = new Move();
         assertFalse("Illegal move allowed", move.playerMove("a2a5", board));
@@ -40,7 +40,7 @@ public class TestMove {
     }
 
     @Test
-    public void testRookMoves(){
+    public void testRookMoves() {
         int[][] gameboard = new int[8][8];
         gameboard[0][0] = 2;
         gameboard[0][7] = 2;
@@ -76,7 +76,7 @@ public class TestMove {
     }
 
     @Test
-    public void testKnightMoves(){
+    public void testKnightMoves() {
         int[][] gameboard = new int[8][8];
         gameboard[2][2] = 3;
         gameboard[5][2] = -3;
@@ -111,7 +111,7 @@ public class TestMove {
     }
 
     @Test
-    public void testBishopMoves(){
+    public void testBishopMoves() {
         int[][] gameboard = new int[8][8];
         gameboard[1][1] = 4;
         gameboard[1][2] = 4;
@@ -130,8 +130,13 @@ public class TestMove {
         assertFalse("Illegal move allowed", move.playerMove("b2c4", board));
         assertFalse("Illegal move allowed", move.playerMove("b2f7", board));
         assertFalse("White bishop allowed to move over own piece", move.playerMove("c2h7", board));
-        assertFalse("White bishop allowed to move on top of own piece", move.playerMove("c2g6", board));
-        assertFalse("White bishop allowed to move over enemy piece", move.playerMove("b2h8", board));
+
+        assertFalse("White bishop allowed to move on top of own piece",
+                move.playerMove("c2g6", board));
+
+        assertFalse("White bishop allowed to move over enemy piece",
+                move.playerMove("b2h8", board));
+
         assertFalse("White allowed to move black bishop", move.playerMove("b7a8", board));
         assertTrue("Legal move not allowed", move.playerMove("b2a1", board));
         assertFalse("Illegal move allowed", move.playerMove("b7a7", board));
@@ -141,8 +146,13 @@ public class TestMove {
         assertFalse("Illegal move allowed", move.playerMove("b7c5", board));
         assertFalse("Illegal move allowed", move.playerMove("b7f2", board));
         assertFalse("Black bishop allowed to move over own piece", move.playerMove("c7h2", board));
-        assertFalse("Black bishop allowed to move on top of own piece", move.playerMove("c7g3", board));
-        assertFalse("Black bishop allowed to move over enemy piece", move.playerMove("b7h1", board));
+
+        assertFalse("Black bishop allowed to move on top of own piece",
+                move.playerMove("c7g3", board));
+
+        assertFalse("Black bishop allowed to move over enemy piece",
+                move.playerMove("b7h1", board));
+
         assertFalse("Black allowed to move white bishop", move.playerMove("a1b2", board));
         assertTrue("Legal move not allowed", move.playerMove("b7a8", board));
         assertTrue("Legal move not allowed", move.playerMove("a1g7", board));
@@ -153,8 +163,8 @@ public class TestMove {
         assertTrue("Legal move not allowed", move.playerMove("f1h3", board));
     }
 
-    @Test
-    public void testQueenMoves(){ // Queen moves are combination of rook and bishop moves so only limited queen testing
+    @Test //Queen moves are combination of rook and bishop moves so only limited queen testing
+    public void testQueenMoves() {
         int[][] gameboard = new int[8][8];
         gameboard[1][1] = 5;
         gameboard[6][1] = -5;
@@ -169,7 +179,7 @@ public class TestMove {
     }
 
     @Test
-    public void testKingMoves(){
+    public void testKingMoves() {
         int[][] gameboard = new int[8][8];
         gameboard[1][1] = 3;
         gameboard[0][7] = -3;

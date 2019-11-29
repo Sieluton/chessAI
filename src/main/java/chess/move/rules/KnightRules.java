@@ -14,7 +14,7 @@ public class KnightRules {
      * @param board Board object that stores game state
      * @return True if move is valid
      */
-    public boolean isValidMove(Move move, Board board){
+    public boolean isValidMove(Move move, Board board) {
         int startsquare = board.getBoard()[move.getMove()[1]][move.getMove()[0]]; //Stores value of start square
         int endsquare = board.getBoard()[move.getMove()[3]][move.getMove()[2]]; //Stores value of end square
         //Check that start square is white knight and end square is empty or black piece
@@ -26,7 +26,7 @@ public class KnightRules {
         //Check that start square is black knight and end square is empty or white piece
         else if (!board.getWhitetomove() &&  //Check is it blacks turn
                 startsquare == 3 && //Check does start square contain black knight
-                endsquare <= 0){ //Check is end square empty or white piece
+                endsquare <= 0) { //Check is end square empty or white piece
             return moveCheck(move, board);
         }
         return false;
@@ -38,9 +38,9 @@ public class KnightRules {
      * @param board Board object that stores game state
      * @return True if move is allowed
      */
-    public boolean moveCheck(Move move, Board board){
+    public boolean moveCheck(Move move, Board board) {
         //If move is correct for knight return true
-        if (moveCorrectAmount(move)){
+        if (moveCorrectAmount(move)) {
             return true;
         }
         return false;
@@ -51,11 +51,11 @@ public class KnightRules {
      * @param move Move object contains move
      * @return True if move is legal
      */
-    public boolean moveCorrectAmount(Move move){
+    public boolean moveCorrectAmount(Move move) {
         int a = math.abs(move.getMove()[0] - move.getMove()[2]); //Store absolute value of subtraction of start square x and end square x
         int b = math.abs(move.getMove()[1] - move.getMove()[3]); //Store absolute value of subtraction of start square y and end square y
         //True if moves 2 steps in one axis and 1 step in other axis
-        if ((a == 2 && b == 1) || (a == 1 && b == 2)){
+        if ((a == 2 && b == 1) || (a == 1 && b == 2)) {
             return true;
         }
         return false;
