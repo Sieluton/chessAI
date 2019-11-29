@@ -28,7 +28,7 @@ public class Board {
         this.board[7][6] = -3;
         this.board[7][7] = -2;
 
-        for (int i=0; i < 8; i++) {
+        for (int i = 0; i < 8; i++) {
             this.board[1][i] = 1;
             this.board[6][i] = -1;
         }

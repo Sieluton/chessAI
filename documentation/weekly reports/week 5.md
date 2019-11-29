@@ -4,4 +4,6 @@ Code review done. 3 hours.
 
 Fixed all checkstyle errors that made code better. 1 hour.
 
-Total time 4 hours.
+Parts of kings movement rules done. 3 hours.
+
+Total time 7 hours.
