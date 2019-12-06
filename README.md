@@ -16,3 +16,5 @@
 [Week 4](https://github.com/Sieluton/chessAI/blob/master/documentation/weekly%20reports/week%204.md)
 
 [Week 5](https://github.com/Sieluton/chessAI/blob/master/documentation/weekly%20reports/week%205.md)
+
+[Week 6](https://github.com/Sieluton/chessAI/blob/master/documentation/weekly%20reports/week%206.md)
