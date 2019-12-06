@@ -5,6 +5,12 @@ public class Board {
     public int[][] board;
     public boolean whitetomove;
     public int enpassant = 0;
+    public boolean whitekingmoved = false;
+    public boolean whiteleftrookmoved = false;
+    public boolean whiterightrookmoved = false;
+    public boolean blackkingmoved = false;
+    public boolean blackleftrookmoved = false;
+    public boolean blackrightrookmoved = false;
 
     /**
      * Constructor for normal game
@@ -91,6 +97,102 @@ public class Board {
      */
     public void setEnpassant(int enpassant) {
         this.enpassant = enpassant;
+    }
+
+    /**
+     * Getter for whitekingmoved
+     * @return True if moved
+     */
+    public boolean isWhitekingmoved() {
+        return whitekingmoved;
+    }
+
+    /**
+     * Setter for whitekingmoved
+     * @param whitekingmoved boolean
+     */
+    public void setWhitekingmoved(boolean whitekingmoved) {
+        this.whitekingmoved = whitekingmoved;
+    }
+
+    /**
+     * Getter for whiteleftrookmoved
+     * @return True if moved
+     */
+    public boolean isWhiteleftrookmoved() {
+        return whiteleftrookmoved;
+    }
+
+    /**
+     * Setter for whiteleftrookmoved
+     * @param whiteleftrookmoved boolean
+     */
+    public void setWhiteleftrookmoved(boolean whiteleftrookmoved) {
+        this.whiteleftrookmoved = whiteleftrookmoved;
+    }
+
+    /**
+     * Getter for whiterightrookmoved
+     * @return True if moved
+     */
+    public boolean isWhiterightrookmoved() {
+        return whiterightrookmoved;
+    }
+
+    /**
+     * Setter for whiterightrookmoved
+     * @param whiterightrookmoved boolean
+     */
+    public void setWhiterightrookmoved(boolean whiterightrookmoved) {
+        this.whiterightrookmoved = whiterightrookmoved;
+    }
+
+    /**
+     * Getter for blackkingmoved
+     * @return True if moved
+     */
+    public boolean isBlackkingmoved() {
+        return blackkingmoved;
+    }
+
+    /**
+     * Setter for blackkingmoved
+     * @param blackkingmoved boolean
+     */
+    public void setBlackkingmoved(boolean blackkingmoved) {
+        this.blackkingmoved = blackkingmoved;
+    }
+
+    /**
+     * Getter for blackleftrookmoved
+     * @return True if moved
+     */
+    public boolean isBlackleftrookmoved() {
+        return blackleftrookmoved;
+    }
+
+    /**
+     * Setter for blackleftrookmoved
+     * @param blackleftrookmoved boolean
+     */
+    public void setBlackleftrookmoved(boolean blackleftrookmoved) {
+        this.blackleftrookmoved = blackleftrookmoved;
+    }
+
+    /**
+     * Getter for blackrightrookmoved
+     * @return True if moved
+     */
+    public boolean isBlackrightrookmoved() {
+        return blackrightrookmoved;
+    }
+
+    /**
+     * Setter for blackrightrookmoved
+     * @param blackrightrookmoved boolean
+     */
+    public void setBlackrightrookmoved(boolean blackrightrookmoved) {
+        this.blackrightrookmoved = blackrightrookmoved;
     }
 
     /**

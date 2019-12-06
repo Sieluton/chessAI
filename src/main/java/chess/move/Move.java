@@ -54,32 +54,32 @@ public class Move {
         if (board.getEnpassant() > 0) {
             board.removeEnPassant();
         }
-        //If move is pawn move let pawn mover class handle it
+        //If move is pawn move let pawn move class handle it
         if (validator.isPawnMove(this, board)) {
             pawnmoves.makeMove(this, board);
             return true;
         }
-        //If move is rook move let rook mover class handle it
+        //If move is rook move let rook move class handle it
         else if (validator.isRookMove(this, board)) {
             rookmoves.makeMove(this, board);
             return true;
         }
-        //If move is knight move let knight mover class handle it
+        //If move is knight move let knight move class handle it
         else if (validator.isKnightMove(this, board)) {
             knightmoves.makeMove(this, board);
             return true;
         }
-        //If move is bishop move let bishop mover class handle it
+        //If move is bishop move let bishop move class handle it
         else if (validator.isBishopMove(this, board)) {
             bishopmoves.makeMove(this, board);
             return true;
         }
-        //If move is queen move let queen mover class handle it
+        //If move is queen move let queen move class handle it
         else if (validator.isQueenMove(this, board)) {
             queenmoves.makeMove(this, board);
             return true;
         }
-        //If move is king move let king mover class handle it
+        //If move is king move let king move class handle it
         else if (validator.isKingMove(this, board)) {
             kingmoves.makeMove(this, board);
             return true;

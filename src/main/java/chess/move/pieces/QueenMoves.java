@@ -11,7 +11,7 @@ public class QueenMoves {
      * @param board Board object that stores game state
      */
     public void makeMove(Move move, Board board) {
-        move(move, board); //Call method that executes give move
+        move(move, board); //Call method that executes given move
         board.changeTurn(); //Change turn
     }
 
