@@ -1,5 +1,10 @@
 package chess;
 
+import chess.move.Move;
+import chess.move.MoveGenerator;
+
+import java.util.Deque;
+
 public class Board {
 
     public int[][] board;
@@ -11,6 +16,7 @@ public class Board {
     public boolean blackkingmoved = false;
     public boolean blackleftrookmoved = false;
     public boolean blackrightrookmoved = false;
+    public Deque<Move> queue;
 
     /**
      * Constructor for normal game
@@ -270,6 +276,24 @@ public class Board {
                 }
             }
         }
+    }
+
+    /**
+     * Uses movement generation to get all possible moves to a queue
+     */
+    public void generateMoves() {
+        queue = new MoveGenerator().generateMoves(this);
+    }
+
+    /**
+     * Checks is there any legal moves available
+     * @return True if there is move
+     */
+    public boolean isLegalMoves(){
+        if (queue.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 
     /**
