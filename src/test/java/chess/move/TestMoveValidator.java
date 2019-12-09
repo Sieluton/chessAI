@@ -1,7 +1,8 @@
-package chess;
+package chess.move;
 
 import static org.junit.Assert.*;
 
+import chess.Board;
 import chess.move.Move;
 import chess.move.MoveValidator;
 import org.junit.Test;

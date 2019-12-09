@@ -57,34 +57,65 @@ public class Move {
         //If move is pawn move let pawn move class handle it
         if (validator.isPawnMove(this, board)) {
             pawnmoves.makeMove(this, board);
+            rookMovementTracker(this, board);
             return true;
         }
         //If move is rook move let rook move class handle it
         else if (validator.isRookMove(this, board)) {
             rookmoves.makeMove(this, board);
+            rookMovementTracker(this, board);
             return true;
         }
         //If move is knight move let knight move class handle it
         else if (validator.isKnightMove(this, board)) {
             knightmoves.makeMove(this, board);
+            rookMovementTracker(this, board);
             return true;
         }
         //If move is bishop move let bishop move class handle it
         else if (validator.isBishopMove(this, board)) {
             bishopmoves.makeMove(this, board);
+            rookMovementTracker(this, board);
             return true;
         }
         //If move is queen move let queen move class handle it
         else if (validator.isQueenMove(this, board)) {
             queenmoves.makeMove(this, board);
+            rookMovementTracker(this, board);
             return true;
         }
         //If move is king move let king move class handle it
         else if (validator.isKingMove(this, board)) {
             kingmoves.makeMove(this, board);
+            rookMovementTracker(this, board);
             return true;
         }
         return false;
+    }
+
+    /**
+     * Keeps tracking if something happens to rook in start position makes castling for not possible
+     * @param movement Move object contains move
+     * @param board Board object that stores game state
+     */
+    public void rookMovementTracker(Move movement, Board board) {
+        int[] move = movement.getMove();
+        if ((move[0] == 0 && move[1] == 0) ||
+                (move[2] == 0 && move[3] == 0)) {
+            board.setBlackleftrookmoved(true);
+        }
+        if ((move[0] == 7 && move[1] == 0) ||
+                (move[2] == 7 && move[3] == 0)) {
+            board.setBlackrightrookmoved(true);
+        }
+        if ((move[0] == 7 && move[1] == 7) ||
+                (move[2] == 7 && move[3] == 7)) {
+            board.setWhiterightrookmoved(true);
+        }
+        if ((move[0] == 0 && move[1] == 7) ||
+                (move[2] == 0 && move[3] == 7)) {
+            board.setWhiteleftrookmoved(true);
+        }
     }
 
     /**

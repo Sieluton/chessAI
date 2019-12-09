@@ -54,18 +54,5 @@ public class KingMoves {
         }
         game[move.getMove()[1]][move.getMove()[0]] = 0;
         game[move.getMove()[3]][move.getMove()[2]] = 0;
-        if (board.getWhitetomove()){
-            if (move.getMove()[2] == 0) {
-                board.setWhiteleftrookmoved(true);
-            } else {
-                board.setWhiterightrookmoved(true);
-            }
-        } else {
-            if (move.getMove()[2] == 0) {
-                board.setBlackleftrookmoved(true);
-            } else {
-                board.setBlackrightrookmoved(true);
-            }
-        }
     }
 }

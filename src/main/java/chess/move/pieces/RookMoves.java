@@ -12,19 +12,6 @@ public class RookMoves {
      */
     public void makeMove(Move move, Board board) {
         move(move, board); //Call method that executes given move
-        if (board.getWhitetomove()){
-            if (move.getMove()[2] == 0) {
-                board.setWhiteleftrookmoved(true);
-            } else {
-                board.setWhiterightrookmoved(true);
-            }
-        } else {
-            if (move.getMove()[2] == 0) {
-                board.setBlackleftrookmoved(true);
-            } else {
-                board.setBlackrightrookmoved(true);
-            }
-        }
         board.changeTurn(); //Change turn
     }
 

@@ -12,25 +12,25 @@ public class MoveValidator {
     public KingRules kingrules = new KingRules();
 
     /**
-     * Checks if start square contains specific piece and then checks is it valid move for that piece
+     * Checks if start square contains specific piece and then checks is it valid move for that piece.
+     * Used to help MoveGenerator.
      * @param move Move object contains move
      * @param board Board object that stores game state
      * @return True if given move is valid move for any piece
      */
     public boolean isValidMove(Move move, Board board) {
-        int piece = board.getBoard()[move.getMove()[1]][move.getMove()[0]];
-        if (piece == 1 || piece == -1) {
-            return pawnrules.isValidMove(move, board);
-        } else if (piece == 2 || piece == -2) {
-            return rookrules.isValidMove(move, board);
-        } else if (piece == 3 || piece == -3) {
-            return knightrules.isValidMove(move, board);
-        } else if (piece == 4 || piece == -4) {
-            return bishoprules.isValidMove(move, board);
-        } else if (piece == 5 || piece == -5) {
-            return queenrules.isValidMove(move, board);
-        } else if (piece == 6 || piece == -6) {
-            return kingrules.isValidMove(move, board);
+        if (pawnrules.isValidMove(move, board)) {
+            return true;
+        } else if (rookrules.isValidMove(move, board)) {
+            return true;
+        } else if (knightrules.isValidMove(move, board)) {
+            return true;
+        } else if (bishoprules.isValidMove(move, board)) {
+            return true;
+        } else if (queenrules.isValidMove(move, board)) {
+            return true;
+        } else if (kingrules.isValidMove(move, board)) {
+            return true;
         }
         return false;
     }

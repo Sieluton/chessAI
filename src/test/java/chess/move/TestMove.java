@@ -1,7 +1,8 @@
-package chess;
+package chess.move;
 
 import static org.junit.Assert.*;
 
+import chess.Board;
 import chess.move.Move;
 import org.junit.Test;
 
@@ -191,5 +192,252 @@ public class TestMove {
         Board board = new Board(gameboard, true);
         Move move = new Move();
 
+    }
+
+    @Test
+    public void testCastling() {
+        int[][] gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[0][4] = 6;
+        gameboard[0][0] = 2;
+        gameboard[0][7] = 2;
+        gameboard[7][0] = -2;
+        Board board = new Board(gameboard, true);
+        Move move = new Move();
+        assertTrue("Legal castling not allowed", move.playerMove("e1a1", board));
+        assertTrue("White king can castle", board.isWhitekingmoved());
+        assertTrue(board.isWhiteleftrookmoved());
+        assertFalse(board.isWhiterightrookmoved());
+        assertFalse(board.isBlackkingmoved());
+        assertFalse(board.isBlackleftrookmoved());
+        assertFalse(board.isBlackrightrookmoved());
+        assertFalse(move.playerMove("e8a8", board));
+        assertTrue(move.playerMove("e8h8", board));
+        assertTrue(board.isBlackrightrookmoved());
+        assertTrue(board.isBlackkingmoved());
+
+        gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[7][0] = -2;
+        gameboard[0][1] = 2;
+        board = new Board(gameboard, true);
+        assertTrue(move.playerMove("e1a1", board));
+
+        gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[7][0] = -2;
+        gameboard[0][2] = 2;
+        board = new Board(gameboard, true);
+        assertFalse(move.playerMove("e1a1", board));
+
+        gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[7][0] = -2;
+        gameboard[0][3] = 2;
+        board = new Board(gameboard, true);
+        assertFalse(move.playerMove("e1a1", board));
+
+        gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[7][0] = -2;
+        gameboard[0][4] = 2;
+        board = new Board(gameboard, true);
+        assertFalse(move.playerMove("e1a1", board));
+
+        gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[7][7] = -2;
+        gameboard[0][4] = 2;
+        board = new Board(gameboard, true);
+        assertFalse(move.playerMove("e1h1", board));
+
+        gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[7][7] = -2;
+        gameboard[0][5] = 2;
+        board = new Board(gameboard, true);
+        assertFalse(move.playerMove("e1h1", board));
+
+        gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[7][7] = -2;
+        gameboard[0][6] = 2;
+        board = new Board(gameboard, true);
+        assertFalse(move.playerMove("e1h1", board));
+
+        gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[7][7] = -2;
+        gameboard[0][7] = 2;
+        board = new Board(gameboard, true);
+        assertTrue(move.playerMove("e1h1", board));
+
+        gameboard = new int[8][8];
+        gameboard[7][0] = -2;
+        gameboard[0][0] = 2;
+        board = new Board(gameboard, false);
+        assertTrue(move.playerMove("a8a1", board));
+        assertTrue(board.isBlackleftrookmoved());
+        assertTrue(board.isWhiteleftrookmoved());
+
+        gameboard = new int[8][8];
+        gameboard[7][7] = -2;
+        gameboard[0][7] = 2;
+        board = new Board(gameboard, false);
+        assertTrue(move.playerMove("h8h1", board));
+        assertTrue(board.isBlackrightrookmoved());
+        assertTrue(board.isWhiterightrookmoved());
+    }
+
+    @Test
+    public void testCastlingDiagonals() {
+        int[][] gameboard = new int[8][8];
+        Board board = new Board(gameboard, true);
+        Move move = new Move();
+
+        gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[7][0] = -2;
+        gameboard[0][7] = 4;
+        board = new Board(gameboard, true);
+        assertTrue(move.playerMove("e1a1", board));
+
+        gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[7][0] = -2;
+        gameboard[1][7] = 4;
+        board = new Board(gameboard, true);
+        assertTrue(move.playerMove("e1a1", board));
+
+        gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[7][0] = -2;
+        gameboard[2][7] = 4;
+        board = new Board(gameboard, true);
+        assertFalse(move.playerMove("e1a1", board));
+
+        gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[7][0] = -2;
+        gameboard[3][7] = 4;
+        board = new Board(gameboard, true);
+        assertFalse(move.playerMove("e1a1", board));
+
+        gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[7][7] = -2;
+        gameboard[4][7] = 4;
+        board = new Board(gameboard, true);
+        assertFalse(move.playerMove("e1h1", board));
+
+        gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[7][7] = -2;
+        gameboard[5][7] = 4;
+        board = new Board(gameboard, true);
+        assertFalse(move.playerMove("e1h1", board));
+
+        gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[7][7] = -2;
+        gameboard[6][7] = 4;
+        board = new Board(gameboard, true);
+        assertFalse(move.playerMove("e1h1", board));
+
+        gameboard = new int[8][8];
+        gameboard[7][4] = -6;
+        gameboard[7][7] = -2;
+        gameboard[0][0] = 4;
+        board = new Board(gameboard, true);
+        assertTrue(move.playerMove("e1h1", board));
+
+        gameboard = new int[8][8];
+        gameboard[4][4] = -6;
+        gameboard[7][2] = 4;
+        gameboard[7][6] = 4;
+        gameboard[6][5] = -1;
+        board = new Board(gameboard, true);
+        assertFalse(move.playerMove("e4e3", board));
+        assertFalse(move.playerMove("e4f4", board));
+        assertTrue(move.playerMove("e4d4", board));
+    }
+
+    @Test
+    public void testDiagonalKingMoves() {
+        int[][] gameboard = new int[8][8];
+        Board board = new Board(gameboard, true);
+        Move move = new Move();
+
+        gameboard = new int[8][8];
+        gameboard[0][4] = 6;
+        gameboard[1][4] = 2;
+        gameboard[2][5] = -4;
+        gameboard[2][6] = -4;
+        board = new Board(gameboard, false);
+        assertFalse(move.playerMove("e8f7", board));
+        assertTrue(move.playerMove("e8d8", board));
+
+        gameboard = new int[8][8];
+        gameboard[2][4] = 6;
+        gameboard[0][4] = -6;
+        board = new Board(gameboard, true);
+        assertFalse(move.playerMove("e8d7", board));
+        assertFalse(move.playerMove("e8e7", board));
+        assertFalse(move.playerMove("e8f7", board));
+        assertTrue(move.playerMove("e8d8", board));
+
+        assertFalse(move.playerMove("e6e7", board));
+        assertFalse(move.playerMove("e6d7", board));
+        assertTrue(move.playerMove("e6d6", board));
+    }
+
+
+    @Test
+    public void kingAndKnightsTest() {
+        int[][] gameboard;
+        Board board;
+        Move move = new Move();
+
+        //For White
+        gameboard = new int[8][8];
+        gameboard[3][4] = -6;
+        gameboard[0][4] = 3;
+        gameboard[6][4] = 3;
+        board = new Board(gameboard, true);
+        assertFalse(move.playerMove("e5d6", board));
+        assertFalse(move.playerMove("e5f6", board));
+        assertFalse(move.playerMove("e5d4", board));
+        assertFalse(move.playerMove("e5f4", board));
+
+        gameboard = new int[8][8];
+        gameboard[3][4] = -6;
+        gameboard[3][1] = 3;
+        gameboard[3][7] = 3;
+        board = new Board(gameboard, true);
+        assertFalse(move.playerMove("e5d6", board));
+        assertFalse(move.playerMove("e5f6", board));
+        assertFalse(move.playerMove("e5d4", board));
+        assertFalse(move.playerMove("e5f4", board));
+
+        //For Black
+        gameboard = new int[8][8];
+        gameboard[3][4] = 6;
+        gameboard[0][4] = -3;
+        gameboard[6][4] = -3;
+        board = new Board(gameboard, false);
+        assertFalse(move.playerMove("e5d6", board));
+        assertFalse(move.playerMove("e5f6", board));
+        assertFalse(move.playerMove("e5d4", board));
+        assertFalse(move.playerMove("e5f4", board));
+
+        gameboard = new int[8][8];
+        gameboard[3][4] = 6;
+        gameboard[3][1] = -3;
+        gameboard[3][7] = -3;
+        board = new Board(gameboard, false);
+        assertFalse(move.playerMove("e5d6", board));
+        assertFalse(move.playerMove("e5f6", board));
+        assertFalse(move.playerMove("e5d4", board));
+        assertFalse(move.playerMove("e5f4", board));
     }
 }
