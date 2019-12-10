@@ -4,6 +4,7 @@ import chess.move.Move;
 import chess.move.MoveGenerator;
 import chess.move.rules.KingRules;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 
 public class Board {
@@ -19,7 +20,7 @@ public class Board {
     public boolean blackrightrookmoved = false;
     public int[] whitekingpos = new int[2];
     public int[] blackkingpos = new int[2];
-    public Deque<Move> queue;
+    public ArrayDeque<Move> queue;
     public int score = 0;
     public KingRules kingrules = new KingRules();
 
@@ -89,8 +90,8 @@ public class Board {
                 }
             }
         }
-        findKingPos();
-        generateMoves();
+        this.findKingPos();
+        this.generateMoves();
     }
 
     /**
@@ -106,7 +107,6 @@ public class Board {
         this.blackkingmoved = board.isBlackkingmoved();
         this.blackleftrookmoved = board.isBlackleftrookmoved();
         this.blackrightrookmoved = board.isBlackrightrookmoved();
-        this.queue = board.queue;
         for (int i = 0; i < 2; i++) {
             this.whitekingpos[i] = board.whitekingpos[i];
             this.blackkingpos[i] = board.blackkingpos[i];
@@ -119,6 +119,7 @@ public class Board {
             }
         }
         this.board = game;
+        this.queue = board.queue;
     }
 
     /**
@@ -358,17 +359,6 @@ public class Board {
      */
     public boolean hasGameEnded() {
         if (!isLegalMoves()){
-            if (getWhitetomove()) {
-                if (this.kingrules.isSquareUnderAttack(this, this.whitekingpos[0], this.whitekingpos[1])) {
-                    score = -1000;
-                }
-
-            }
-            else {
-                if (this.kingrules.isSquareUnderAttack(this, this.blackkingpos[0], this.blackkingpos[1])) {
-                    score = 1000;
-                }
-            }
             return true;
         }
         return false;
@@ -395,6 +385,34 @@ public class Board {
                     whitekingpos[0] = x;
                     whitekingpos[1] = y;
                 }
+            }
+        }
+    }
+
+    /**
+     * Getter for score
+     * @return int score of the game. 0 if tie, 1000 if black won and -1000 if white won
+     */
+    public int getScore() {
+        this.updateScore();
+        return this.score;
+    }
+
+    /**
+     * Updates score of the game
+     */
+    public void updateScore() {
+        if (!this.hasGameEnded()) {
+            return;
+        }
+        if (this.getWhitetomove()) {
+            if (this.kingrules.isSquareUnderAttack(this, this.whitekingpos[0], this.whitekingpos[1])) {
+                this.score = 1000;
+            }
+        }
+        else {
+            if (this.kingrules.isSquareUnderAttack(this, this.blackkingpos[0], this.blackkingpos[1])) {
+                this.score = -1000;
             }
         }
     }

@@ -51,6 +51,9 @@ public class Move {
         else {
             parseMove(playerMove);
         }
+        if (!validator.isValidMove(this, board)) {
+            return false;
+        }
         return makeMove(board);
     }
 
@@ -62,9 +65,6 @@ public class Move {
     public boolean makeMove(Board board) {
         if (board.getEnpassant() > 0) {
             board.removeEnPassant();
-        }
-        if (!validator.isValidMove(this, board)) {
-            return false;
         }
         //If move is pawn move let pawn move class handle it
         if (validator.isPawnMove(this, board)) {
