@@ -12,7 +12,6 @@ public class AI {
     public Move bestMove(Board board, int depth) {
         ArrayDeque<Move> movequeue = board.queue.clone();
         Board copyboard = new Board(board);
-        copyboard.queue = board.queue.clone();
         Move best = movequeue.pop();
         best.makeMove(copyboard);
         int value = alphabeta(copyboard, depth, -maximumScore, maximumScore);
@@ -34,7 +33,7 @@ public class AI {
                 }
             }
         }
-        //System.out.println("Move evaluation " + value);
+        System.out.println("Move evaluation " + value);
         //System.out.println("Amount of pruned moves " + pruned);
         return best;
     }

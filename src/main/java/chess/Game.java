@@ -47,7 +47,7 @@ public class Game {
                 playermove.playerMove(nextmove, board);
             }
             else {
-                aimove = ai.bestMove(board, 3);
+                aimove = ai.bestMove(board, 2);
                 aimove.makeMove(board);
             }
         }
