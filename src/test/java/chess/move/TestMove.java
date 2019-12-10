@@ -207,6 +207,7 @@ public class TestMove {
         gameboard[0][0] = 2;
         gameboard[0][7] = 2;
         gameboard[7][0] = -2;
+        gameboard[7][7] = -2;
         Board board = new Board(gameboard, true);
         Move move = new Move();
         assertTrue("Legal castling not allowed", move.playerMove("e1a1", board));

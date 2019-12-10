@@ -1,12 +1,12 @@
 package chess.move;
 
-import static org.junit.Assert.*;
+        import static org.junit.Assert.*;
 
-import chess.Board;
-import chess.move.Move;
-import org.junit.Test;
+        import chess.Board;
+        import chess.move.Move;
+        import org.junit.Test;
 
-import java.util.Deque;
+        import java.util.Deque;
 
 public class TestMoveGenerator {
 
@@ -157,13 +157,12 @@ public class TestMoveGenerator {
         queue = new MoveGenerator().generateMoves(board);
         assertTrue("" + queue.size(),queue.size() == 26);
     }
-     @Test
+    @Test
     public void testNoMoves() {
-         int[][] gameboard = new int[8][8];
-         Deque<Move> queue;
-         Board board = new Board(gameboard, true);
-         queue = new MoveGenerator().generateMoves(board);
-         assertTrue("" + queue.size(),queue.isEmpty());
-     }
-
+        int[][] gameboard = new int[8][8];
+        Deque<Move> queue;
+        Board board = new Board(gameboard, true);
+        queue = new MoveGenerator().generateMoves(board);
+        assertTrue("" + queue.size(),queue.isEmpty());
+    }
 }

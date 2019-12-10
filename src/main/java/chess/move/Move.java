@@ -51,16 +51,15 @@ public class Move {
         else {
             parseMove(playerMove);
         }
-        return makeMove(this, board);
+        return makeMove(board);
     }
 
     /**
      * Used to make moves in the game
-     * @param move Move object contains move
      * @param board Board object that stores game state
      * @return True if move was made
      */
-    public boolean makeMove(Move move, Board board) {
+    public boolean makeMove(Board board) {
         if (board.getEnpassant() > 0) {
             board.removeEnPassant();
         }
@@ -71,39 +70,34 @@ public class Move {
         if (validator.isPawnMove(this, board)) {
             pawnmoves.makeMove(this, board);
             rookMovementTracker(this, board);
-            return true;
         }
         //If move is rook move let rook move class handle it
         else if (validator.isRookMove(this, board)) {
             rookmoves.makeMove(this, board);
             rookMovementTracker(this, board);
-            return true;
         }
         //If move is knight move let knight move class handle it
         else if (validator.isKnightMove(this, board)) {
             knightmoves.makeMove(this, board);
             rookMovementTracker(this, board);
-            return true;
         }
         //If move is bishop move let bishop move class handle it
         else if (validator.isBishopMove(this, board)) {
             bishopmoves.makeMove(this, board);
             rookMovementTracker(this, board);
-            return true;
         }
         //If move is queen move let queen move class handle it
         else if (validator.isQueenMove(this, board)) {
             queenmoves.makeMove(this, board);
             rookMovementTracker(this, board);
-            return true;
         }
         //If move is king move let king move class handle it
         else if (validator.isKingMove(this, board)) {
             kingmoves.makeMove(this, board);
             rookMovementTracker(this, board);
-            return true;
         }
-        return false;
+        board.generateMoves();
+        return true;
     }
 
     /**

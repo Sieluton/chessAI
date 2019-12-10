@@ -14,9 +14,8 @@ public class Game {
         // Use this to set specific board
 
         int[][] gameboard = new int[8][8];
-        gameboard[1][0] = -1;
-        gameboard[0][1] = 2;
-        gameboard[0][0] = 6;
+
+        gameboard[7][7] = -2;
         Board board = new Board(gameboard, true);
 
         //Board board = new Board();
@@ -24,13 +23,13 @@ public class Game {
         Move mover = new Move();
         Scanner scanner = new Scanner(System.in);
         while (true) {
-            board.generateMoves();
             System.out.println(board);
-            System.out.println(board.queue.size());
-            System.out.println(copyboard.queue.size());
+            while (!board.queue.isEmpty()) {
+                System.out.println("" + board.queue.size());
+                board.queue.pop();
+            }
             String nextmove = scanner.next();
             mover.playerMove(nextmove, board);
-
         }
 
     }

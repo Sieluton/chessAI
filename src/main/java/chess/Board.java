@@ -2,6 +2,7 @@ package chess;
 
 import chess.move.Move;
 import chess.move.MoveGenerator;
+import chess.move.rules.KingRules;
 
 import java.util.Deque;
 
@@ -20,6 +21,7 @@ public class Board {
     public int[] blackkingpos = new int[2];
     public Deque<Move> queue;
     public int score = 0;
+    public KingRules kingrules = new KingRules();
 
     /**
      * Constructor for normal game
@@ -62,6 +64,31 @@ public class Board {
     public Board(int[][] board, boolean whitenext) {
         this.board = board;
         this.whitetomove = whitenext;
+        if (board[7][4] != -6) {
+            this.whitekingmoved = true;
+        }
+        if (board[0][4] != 6) {
+            this.blackkingmoved = true;
+        }
+        if (board[7][7] != -2) {
+            this.whiterightrookmoved = true;
+        }
+        if (board[7][0] != -2) {
+            this.whiteleftrookmoved = true;
+        }
+        if (board[0][7] != 2) {
+            this.blackrightrookmoved = true;
+        }
+        if (board[0][0] != 2) {
+            this.blackleftrookmoved = true;
+        }
+        for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < board.length; x++) {
+                if (board[y][x] == 7 || board[y][x] == -7) {
+                    this.enpassant++;
+                }
+            }
+        }
         findKingPos();
         generateMoves();
     }
@@ -116,14 +143,6 @@ public class Board {
      */
     public boolean getWhitetomove() {
         return this.whitetomove;
-    }
-
-    /**
-     * Whites turn setter
-     * @param whitetomove boolean
-     */
-    public void setWhitetomove(boolean whitetomove) {
-        this.whitetomove = whitetomove;
     }
 
     /**
@@ -340,10 +359,15 @@ public class Board {
     public boolean hasGameEnded() {
         if (!isLegalMoves()){
             if (getWhitetomove()) {
-                score = -1;
+                if (this.kingrules.isSquareUnderAttack(this, this.whitekingpos[0], this.whitekingpos[1])) {
+                    score = -1000;
+                }
+
             }
-            else if (!getWhitetomove()) {
-                score = 1;
+            else {
+                if (this.kingrules.isSquareUnderAttack(this, this.blackkingpos[0], this.blackkingpos[1])) {
+                    score = 1000;
+                }
             }
             return true;
         }
