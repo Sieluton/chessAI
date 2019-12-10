@@ -36,6 +36,7 @@ public class KingMoves {
         game[move.getMove()[3]][move.getMove()[2]] = game[move.getMove()[1]][move.getMove()[0]]; //Copy start square to end square
         game[move.getMove()[1]][move.getMove()[0]] = 0; //Empty start square
         board.setBoard(game); //Make edited chessboard to current chessboard
+        updateKingPos(board, move.getMove()[2], move.getMove()[3]);
     }
 
     /**
@@ -48,11 +49,29 @@ public class KingMoves {
         if (move.getMove()[2] == 0){
             game[move.getMove()[1]][move.getMove()[0] - 2] = game[move.getMove()[1]][move.getMove()[0]];
             game[move.getMove()[1]][move.getMove()[0] - 1] = game[move.getMove()[3]][move.getMove()[2]];
+            updateKingPos(board, move.getMove()[0] - 2, move.getMove()[1]);
         } else {
             game[move.getMove()[1]][move.getMove()[0] + 2] = game[move.getMove()[1]][move.getMove()[0]];
             game[move.getMove()[1]][move.getMove()[0] + 1] = game[move.getMove()[3]][move.getMove()[2]];
+            updateKingPos(board, move.getMove()[0] + 2, move.getMove()[1]);
         }
         game[move.getMove()[1]][move.getMove()[0]] = 0;
         game[move.getMove()[3]][move.getMove()[2]] = 0;
+    }
+
+    /**
+     * Updates kings position after move
+     * @param x int kings position in x-axis
+     * @param y int kings position in y-axis
+     */
+    public void updateKingPos(Board board, int x, int y) {
+        if (board.getWhitetomove()) {
+            board.whitekingpos[0] = x;
+            board.whitekingpos[1] = y;
+        }
+        else if (!board.getWhitetomove()) {
+            board.blackkingpos[0] = x;
+            board.blackkingpos[1] = y;
+        }
     }
 }

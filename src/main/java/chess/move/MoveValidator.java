@@ -1,6 +1,7 @@
 package chess.move;
 
 import chess.Board;
+import chess.move.pieces.*;
 import chess.move.rules.*;
 
 public class MoveValidator {
@@ -10,6 +11,12 @@ public class MoveValidator {
     public BishopRules bishoprules = new BishopRules();
     public QueenRules queenrules = new QueenRules();
     public KingRules kingrules = new KingRules();
+    public PawnMoves pawnmoves = new PawnMoves();
+    public RookMoves rookmoves = new RookMoves();
+    public KnightMoves knightmoves = new KnightMoves();
+    public BishopMoves bishopmoves = new BishopMoves();
+    public QueenMoves queenmoves = new QueenMoves();
+    public KingMoves kingmoves = new KingMoves();
 
     /**
      * Checks if start square contains specific piece and then checks is it valid move for that piece.
@@ -19,17 +26,42 @@ public class MoveValidator {
      * @return True if given move is valid move for any piece
      */
     public boolean isValidMove(Move move, Board board) {
+        Board copyboard = new Board(board);
         if (pawnrules.isValidMove(move, board)) {
+            pawnmoves.makeMove(move, copyboard);
+            if (isKingThreatened(copyboard)) {
+                return false;
+            }
             return true;
         } else if (rookrules.isValidMove(move, board)) {
+            rookmoves.makeMove(move, copyboard);
+            if (isKingThreatened(copyboard)) {
+                return false;
+            }
             return true;
         } else if (knightrules.isValidMove(move, board)) {
+            knightmoves.makeMove(move, copyboard);
+            if (isKingThreatened(copyboard)) {
+                return false;
+            }
             return true;
         } else if (bishoprules.isValidMove(move, board)) {
+            bishopmoves.makeMove(move, copyboard);
+            if (isKingThreatened(copyboard)) {
+                return false;
+            }
             return true;
         } else if (queenrules.isValidMove(move, board)) {
+            queenmoves.makeMove(move, copyboard);
+            if (isKingThreatened(copyboard)) {
+                return false;
+            }
             return true;
         } else if (kingrules.isValidMove(move, board)) {
+            kingmoves.makeMove(move, copyboard);
+            if (isKingThreatened(copyboard)) {
+                return false;
+            }
             return true;
         }
         return false;
@@ -117,5 +149,18 @@ public class MoveValidator {
             return kingrules.isValidMove(move, board);
         }
         return false;
+    }
+
+    /**
+     * Used to check if king under attack after move
+     * @param board Board object that stores game state
+     * @return True if king is under attack
+     */
+    public boolean isKingThreatened(Board board) {
+        board.changeTurn();
+        if (board.getWhitetomove()) {
+            return kingrules.isSquareUnderAttack(board, board.whitekingpos[0], board.whitekingpos[1]);
+        }
+        return kingrules.isSquareUnderAttack(board, board.blackkingpos[0], board.blackkingpos[1]);
     }
 }

@@ -65,29 +65,31 @@ public class MoveGenerator {
             if (move[1] == 6) {
                 move[2] = move[0];
                 move[3] = move[1] - 2;
-                if (validator.isPawnMove(new Move(move), board)) {
+                if (validator.isValidMove(new Move(move), board)) {
                     queue.add(new Move(move));
                 }
             }
 
             move[2] = move[0];
             move[3] = move[1] - 1;
-            if (validator.isPawnMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
 
             move[2] = move[0] - 1;
             move[3] = move[1] - 1;
-            moveOutOfBounds(move);
-            if (validator.isPawnMove(new Move(move), board)) {
-                queue.add(new Move(move));
+            if (!moveOutOfBounds(move)) {
+                if (validator.isValidMove(new Move(move), board)) {
+                    queue.add(new Move(move));
+                }
             }
 
             move[2] = move[0] + 1;
             move[3] = move[1] - 1;
-            moveOutOfBounds(move);
-            if (validator.isPawnMove(new Move(move), board)) {
-                queue.add(new Move(move));
+            if (!moveOutOfBounds(move)) {
+                if (validator.isValidMove(new Move(move), board)) {
+                    queue.add(new Move(move));
+                }
             }
         }
 
@@ -95,21 +97,21 @@ public class MoveGenerator {
             if (move[1] == 1) {
                 move[2] = move[0];
                 move[3] = move[1] + 2;
-                if (validator.isPawnMove(new Move(move), board)) {
+                if (validator.isValidMove(new Move(move), board)) {
                     queue.add(new Move(move));
                 }
             }
 
             move[2] = move[0];
             move[3] = move[1] + 1;
-            if (validator.isPawnMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
 
             move[2] = move[0] - 1;
             move[3] = move[1] + 1;
             if (!moveOutOfBounds(move)){
-                if (validator.isPawnMove(new Move(move), board)) {
+                if (validator.isValidMove(new Move(move), board)) {
                     queue.add(new Move(move));
                 }
             }
@@ -117,7 +119,7 @@ public class MoveGenerator {
             move[2] = move[0] + 1;
             move[3] = move[1] + 1;
             if (!moveOutOfBounds(move)){
-                if (validator.isPawnMove(new Move(move), board)) {
+                if (validator.isValidMove(new Move(move), board)) {
                     queue.add(new Move(move));
                 }
             }
@@ -128,56 +130,56 @@ public class MoveGenerator {
         move[2] = move[0] + 1;
         move[3] = move[1] + 2;
         if (!moveOutOfBounds(move)){
-            if (validator.isKnightMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
         move[2] = move[0] + 1;
         move[3] = move[1] - 2;
         if (!moveOutOfBounds(move)){
-            if (validator.isKnightMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
         move[2] = move[0] - 1;
         move[3] = move[1] + 2;
         if (!moveOutOfBounds(move)){
-            if (validator.isKnightMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
         move[2] = move[0] - 1;
         move[3] = move[1] - 2;
         if (!moveOutOfBounds(move)){
-            if (validator.isKnightMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
         move[2] = move[0] + 2;
         move[3] = move[1] + 1;
         if (!moveOutOfBounds(move)){
-            if (validator.isKnightMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
         move[2] = move[0] + 2;
         move[3] = move[1] - 1;
         if (!moveOutOfBounds(move)){
-            if (validator.isKnightMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
         move[2] = move[0] - 2;
         move[3] = move[1] + 1;
         if (!moveOutOfBounds(move)){
-            if (validator.isKnightMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
         move[2] = move[0] - 2;
         move[3] = move[1] - 1;
         if (!moveOutOfBounds(move)){
-            if (validator.isKnightMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
@@ -187,32 +189,44 @@ public class MoveGenerator {
         move[3] = move[1];
         for (int i = move[0] + 1; i < board.getBoard().length; i++) {
             move[2] = i;
-            if (!validator.isRookMove(new Move(move), board)) {
-                break;
+            if (!validator.isValidMove(new Move(move), board)) {
+                if (board.getBoard()[move[3]][move[2]] != 0) {
+                    break;
+                }
+                continue;
             }
             queue.add(new Move(move));
         }
 
         for (int i = move[0] - 1; i >= 0; i--) {
             move[2] = i;
-            if (!validator.isRookMove(new Move(move), board)) {
-                break;
+            if (!validator.isValidMove(new Move(move), board)) {
+                if (board.getBoard()[move[3]][move[2]] != 0) {
+                    break;
+                }
+                continue;
             }
             queue.add(new Move(move));
         }
         move[2] = move[0];
         for (int i = move[1] + 1; i < board.getBoard().length; i++) {
             move[3] = i;
-            if (!validator.isRookMove(new Move(move), board)) {
-                break;
+            if (!validator.isValidMove(new Move(move), board)) {
+                if (board.getBoard()[move[3]][move[2]] != 0) {
+                    break;
+                }
+                continue;
             }
             queue.add(new Move(move));
         }
 
         for (int i = move[1] - 1; i >= 0; i--) {
             move[3] = i;
-            if (!validator.isRookMove(new Move(move), board)) {
-                break;
+            if (!validator.isValidMove(new Move(move), board)) {
+                if (board.getBoard()[move[3]][move[2]] != 0) {
+                    break;
+                }
+                continue;
             }
             queue.add(new Move(move));
         }
@@ -227,8 +241,11 @@ public class MoveGenerator {
             }
             move[2] = move[0] + i;
             move[3] = move[1] + i;
-            if (!validator.isBishopMove(new Move(move), board)) {
-                break;
+            if (!validator.isValidMove(new Move(move), board)) {
+                if (board.getBoard()[move[3]][move[2]] != 0) {
+                    break;
+                }
+                continue;
             }
             queue.add(new Move(move));
         }
@@ -240,8 +257,11 @@ public class MoveGenerator {
             }
             move[2] = move[0] + i;
             move[3] = move[1] - i;
-            if (!validator.isBishopMove(new Move(move), board)) {
-                break;
+            if (!validator.isValidMove(new Move(move), board)) {
+                if (board.getBoard()[move[3]][move[2]] != 0) {
+                    break;
+                }
+                continue;
             }
             queue.add(new Move(move));
         }
@@ -253,8 +273,11 @@ public class MoveGenerator {
             }
             move[2] = move[0] - i;
             move[3] = move[1] + i;
-            if (!validator.isBishopMove(new Move(move), board)) {
-                break;
+            if (!validator.isValidMove(new Move(move), board)) {
+                if (board.getBoard()[move[3]][move[2]] != 0) {
+                    break;
+                }
+                continue;
             }
             queue.add(new Move(move));
         }
@@ -266,112 +289,30 @@ public class MoveGenerator {
             }
             move[2] = move[0] - i;
             move[3] = move[1] - i;
-            if (!validator.isBishopMove(new Move(move), board)) {
-                break;
+            if (!validator.isValidMove(new Move(move), board)) {
+                if (board.getBoard()[move[3]][move[2]] != 0) {
+                    break;
+                }
+                continue;
             }
             queue.add(new Move(move));
         }
     }
 
     public void generateQueenMoves(Board board, int[] move) {
-        //Rook moves
-        move[3] = move[1];
-        for (int i = move[0] + 1; i < board.getBoard().length; i++) {
-            move[2] = i;
-            if (!validator.isQueenMove(new Move(move), board)) {
-                break;
-            }
-            queue.add(new Move(move));
-        }
-
-        for (int i = move[0] - 1; i >= 0; i--) {
-            move[2] = i;
-            if (!validator.isQueenMove(new Move(move), board)) {
-                break;
-            }
-            queue.add(new Move(move));
-        }
-        move[2] = move[0];
-        for (int i = move[1] + 1; i < board.getBoard().length; i++) {
-            move[3] = i;
-            if (!validator.isQueenMove(new Move(move), board)) {
-                break;
-            }
-            queue.add(new Move(move));
-        }
-
-        for (int i = move[1] - 1; i >= 0; i--) {
-            move[3] = i;
-            if (!validator.isQueenMove(new Move(move), board)) {
-                break;
-            }
-            queue.add(new Move(move));
-        }
-
-        //Bishop moves
-        int length = board.getBoard().length;
-        for (int i = 1; i < length; i++) {
-            if ((move[0] + i >= length) ||
-                    (move[1] + i >= length)) {
-                break;
-            }
-            move[2] = move[0] + i;
-            move[3] = move[1] + i;
-            if (!validator.isQueenMove(new Move(move), board)) {
-                break;
-            }
-            queue.add(new Move(move));
-        }
-
-        for (int i = 1; i < length; i++) {
-            if ((move[0] + i >= length) ||
-                    (move[1] - i < 0)) {
-                break;
-            }
-            move[2] = move[0] + i;
-            move[3] = move[1] - i;
-            if (!validator.isQueenMove(new Move(move), board)) {
-                break;
-            }
-            queue.add(new Move(move));
-        }
-
-        for (int i = 1; i < length; i++) {
-            if ((move[0] - i < 0) ||
-                    (move[1] + i >= length)) {
-                break;
-            }
-            move[2] = move[0] - i;
-            move[3] = move[1] + i;
-            if (!validator.isQueenMove(new Move(move), board)) {
-                break;
-            }
-            queue.add(new Move(move));
-        }
-
-        for (int i = 1; i < length; i++) {
-            if ((move[0] - i < 0) ||
-                    (move[1] - i < 0)) {
-                break;
-            }
-            move[2] = move[0] - i;
-            move[3] = move[1] - i;
-            if (!validator.isQueenMove(new Move(move), board)) {
-                break;
-            }
-            queue.add(new Move(move));
-        }
+        generateRookMoves(board, move);
+        generateBishopMoves(board, move);
     }
 
     public void generateKingMoves(Board board, int[] move) {
         if (board.getWhitetomove() && !board.isWhitekingmoved()) {
             move[2] = 0;
             move[3] = 7;
-            if (validator.isKingMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
             move[2] = 7;
-            if (validator.isKingMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
@@ -379,24 +320,24 @@ public class MoveGenerator {
         if (!board.getWhitetomove() && !board.isBlackkingmoved()) {
             move[2] = 0;
             move[3] = 0;
-            if (validator.isKingMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
             move[2] = 7;
-            if (validator.isKingMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
         move[2] = move[0];
         move[3] = move[1] + 1;
         if (!moveOutOfBounds(move)) {
-            if (validator.isKingMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
         move[3] = move[1] - 1;
         if (!moveOutOfBounds(move)) {
-            if (validator.isKingMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
@@ -404,19 +345,19 @@ public class MoveGenerator {
         move[2] = move[0] - 1;
         move[3] = move[1];
         if (!moveOutOfBounds(move)) {
-            if (validator.isKingMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
         move[3] = move[1] + 1;
         if (!moveOutOfBounds(move)) {
-            if (validator.isKingMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
         move[3] = move[1] - 1;
         if (!moveOutOfBounds(move)) {
-            if (validator.isKingMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
@@ -424,19 +365,19 @@ public class MoveGenerator {
         move[2] = move[0] + 1;
         move[3] = move[1];
         if (!moveOutOfBounds(move)) {
-            if (validator.isKingMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
         move[3] = move[1] + 1;
         if (!moveOutOfBounds(move)) {
-            if (validator.isKingMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }
         move[3] = move[1] - 1;
         if (!moveOutOfBounds(move)) {
-            if (validator.isKingMove(new Move(move), board)) {
+            if (validator.isValidMove(new Move(move), board)) {
                 queue.add(new Move(move));
             }
         }

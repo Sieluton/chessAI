@@ -16,7 +16,10 @@ public class Board {
     public boolean blackkingmoved = false;
     public boolean blackleftrookmoved = false;
     public boolean blackrightrookmoved = false;
+    public int[] whitekingpos = new int[2];
+    public int[] blackkingpos = new int[2];
     public Deque<Move> queue;
+    public int score = 0;
 
     /**
      * Constructor for normal game
@@ -28,6 +31,7 @@ public class Board {
         this.board[0][2] = 4;
         this.board[0][3] = 5;
         this.board[0][4] = 6;
+        this.blackkingpos[0] = 4;
         this.board[0][5] = 4;
         this.board[0][6] = 3;
         this.board[0][7] = 2;
@@ -36,6 +40,8 @@ public class Board {
         this.board[7][2] = -4;
         this.board[7][3] = -5;
         this.board[7][4] = -6;
+        this.whitekingpos[0] = 4;
+        this.whitekingpos[1] = 7;
         this.board[7][5] = -4;
         this.board[7][6] = -3;
         this.board[7][7] = -2;
@@ -45,6 +51,7 @@ public class Board {
             this.board[6][i] = -1;
         }
         this.whitetomove = true;
+        generateMoves();
     }
 
     /**
@@ -55,6 +62,36 @@ public class Board {
     public Board(int[][] board, boolean whitenext) {
         this.board = board;
         this.whitetomove = whitenext;
+        findKingPos();
+        generateMoves();
+    }
+
+    /**
+     * Make copy of another Board object
+     * @param board Board object that stores game state
+     */
+    public Board(Board board) {
+        this.whitetomove = board.getWhitetomove();
+        this.enpassant = board.getEnpassant();
+        this.whitekingmoved = board.isWhitekingmoved();
+        this.whiteleftrookmoved = board.isWhiteleftrookmoved();
+        this.whiterightrookmoved = board.isWhiterightrookmoved();
+        this.blackkingmoved = board.isBlackkingmoved();
+        this.blackleftrookmoved = board.isBlackleftrookmoved();
+        this.blackrightrookmoved = board.isBlackrightrookmoved();
+        this.queue = board.queue;
+        for (int i = 0; i < 2; i++) {
+            this.whitekingpos[i] = board.whitekingpos[i];
+            this.blackkingpos[i] = board.blackkingpos[i];
+        }
+        int[][] game = new int[8][8];
+        int[][] copygame = board.getBoard();
+        for (int y = 0; y < game.length; y++) {
+            for (int x = 0; x < game.length; x++) {
+                game[y][x] = copygame[y][x];
+            }
+        }
+        this.board = game;
     }
 
     /**
@@ -211,44 +248,44 @@ public class Board {
         for (int i = 0; i < this.board.length; i++) {
             boardstring += "\n" + (8 - i) + "|";
             for (int j = 0; j < this.board.length; j++) {
-                if (this.board[i][j] == 0) {
-                    boardstring += " 0 ";
-                }
                 if (this.board[i][j] == 1) {
                     boardstring += " P ";
                 }
-                if (this.board[i][j] == 2) {
+                else if (this.board[i][j] == 2) {
                     boardstring += " R ";
                 }
-                if (this.board[i][j] == 3) {
+                else if (this.board[i][j] == 3) {
                     boardstring += " N ";
                 }
-                if (this.board[i][j] == 4) {
+                else if (this.board[i][j] == 4) {
                     boardstring += " B ";
                 }
-                if (this.board[i][j] == 5) {
+                else if (this.board[i][j] == 5) {
                     boardstring += " Q ";
                 }
-                if (this.board[i][j] == 6) {
+                else if (this.board[i][j] == 6) {
                     boardstring += " K ";
                 }
-                if (this.board[i][j] == -1) {
+                else if (this.board[i][j] == -1) {
                     boardstring += " p ";
                 }
-                if (this.board[i][j] == -2) {
+                else if (this.board[i][j] == -2) {
                     boardstring += " r ";
                 }
-                if (this.board[i][j] == -3) {
+                else if (this.board[i][j] == -3) {
                     boardstring += " n ";
                 }
-                if (this.board[i][j] == -4) {
+                else if (this.board[i][j] == -4) {
                     boardstring += " b ";
                 }
-                if (this.board[i][j] == -5) {
+                else if (this.board[i][j] == -5) {
                     boardstring += " q ";
                 }
-                if (this.board[i][j] == -6) {
+                else if (this.board[i][j] == -6) {
                     boardstring += " k ";
+                }
+                else {
+                    boardstring += " 0 ";
                 }
             }
         }
@@ -287,9 +324,9 @@ public class Board {
 
     /**
      * Checks is there any legal moves available
-     * @return True if there is move
+     * @return True if there is at least one move
      */
-    public boolean isLegalMoves(){
+    public boolean isLegalMoves() {
         if (queue.isEmpty()) {
             return false;
         }
@@ -297,9 +334,44 @@ public class Board {
     }
 
     /**
+     * Checks has game ended
+     * @return True if game has ended
+     */
+    public boolean hasGameEnded() {
+        if (!isLegalMoves()){
+            if (getWhitetomove()) {
+                score = -1;
+            }
+            else if (!getWhitetomove()) {
+                score = 1;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Change which players turn it is
      */
     public void changeTurn() {
         this.whitetomove = !this.whitetomove;
+    }
+
+    /**
+     * Used to find king positions
+     */
+    public void findKingPos() {
+        for (int y = 0; y < board.length; y++) {
+            for (int x = 0; x < board.length; x++) {
+                if (board[y][x] == 6) {
+                    blackkingpos[0] = x;
+                    blackkingpos[1] = y;
+                }
+                if (board[y][x] == -6) {
+                    whitekingpos[0] = x;
+                    whitekingpos[1] = y;
+                }
+            }
+        }
     }
 }

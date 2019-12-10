@@ -38,8 +38,9 @@ public class Move {
     }
 
     /**
-     * Given a move passes it to right method to handle.
+     * * Given a move checks and passes it to right method to handle.
      * @param playerMove move as String
+     * @param board Board object that stores game state
      * @return True if the move was made
      */
     public boolean playerMove(String playerMove, Board board) {
@@ -50,9 +51,21 @@ public class Move {
         else {
             parseMove(playerMove);
         }
-        //If board contains en passant shadow value from last round remove it
+        return makeMove(this, board);
+    }
+
+    /**
+     * Used to make moves in the game
+     * @param move Move object contains move
+     * @param board Board object that stores game state
+     * @return True if move was made
+     */
+    public boolean makeMove(Move move, Board board) {
         if (board.getEnpassant() > 0) {
             board.removeEnPassant();
+        }
+        if (!validator.isValidMove(this, board)) {
+            return false;
         }
         //If move is pawn move let pawn move class handle it
         if (validator.isPawnMove(this, board)) {

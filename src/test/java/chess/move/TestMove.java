@@ -51,6 +51,8 @@ public class TestMove {
         gameboard[5][7] = -1;
         gameboard[1][0] = 1;
         Board board = new Board(gameboard, true);
+        board.whitekingpos = new int[]{4,4};
+        board.blackkingpos = new int[]{4,4};
         Move move = new Move();
         assertFalse("White can move black rook", move.playerMove("a8b8", board));
         assertFalse("Illegal move allowed", move.playerMove("a1b2", board));
@@ -79,36 +81,38 @@ public class TestMove {
     @Test
     public void testKnightMoves() {
         int[][] gameboard = new int[8][8];
-        gameboard[2][2] = 3;
-        gameboard[5][2] = -3;
-        gameboard[0][1] = 1;
-        gameboard[7][3] = 1;
-        gameboard[0][3] = -1;
-        gameboard[7][1] = -1;
+        gameboard[3][2] = 3;
+        gameboard[4][2] = -3;
+        gameboard[1][1] = 1;
+        gameboard[6][3] = 1;
+        gameboard[1][3] = -1;
+        gameboard[6][1] = -1;
         Board board = new Board(gameboard, true);
+        board.whitekingpos = new int[]{7,4};
+        board.blackkingpos = new int[]{7,4};
         Move move = new Move();
-        assertFalse("Illegal move allowed", move.playerMove("c3a1", board));
-        assertFalse("Illegal move allowed", move.playerMove("c3d4", board));
-        assertFalse("Illegal move allowed", move.playerMove("c3f4", board));
-        assertFalse("Illegal move allowed", move.playerMove("c3c5", board));
-        assertFalse("Illegal move allowed", move.playerMove("c3e3", board));
-        assertFalse("Allowed to move over own piece", move.playerMove("c3b1", board));
-        assertFalse("White allowed to move black knight", move.playerMove("c6b4", board));
-        assertTrue("Not allowed to take enemy piece", move.playerMove("c3d1", board));
-        assertFalse("Illegal move allowed", move.playerMove("c6a8", board));
-        assertFalse("Illegal move allowed", move.playerMove("c6d7", board));
-        assertFalse("Illegal move allowed", move.playerMove("c6f7", board));
-        assertFalse("Illegal move allowed", move.playerMove("c6c4", board));
-        assertFalse("Illegal move allowed", move.playerMove("c6e6", board));
-        assertFalse("Allowed to move over own piece", move.playerMove("c6b8", board));
-        assertFalse("Black allowed to move white knight", move.playerMove("c3b5", board));
-        assertTrue("Not allowed to take enemy piece", move.playerMove("c6d8", board));
-        assertTrue("Legal move not allowed", move.playerMove("d1e3", board));
-        assertTrue("Legal move not allowed", move.playerMove("d8e6", board));
-        assertTrue("Legal move not allowed", move.playerMove("e3c4", board));
-        assertTrue("Legal move not allowed", move.playerMove("e6c5", board));
-        assertTrue("Legal move not allowed", move.playerMove("c4e5", board));
-        assertTrue("Legal move not allowed", move.playerMove("c5e4", board));
+        assertFalse("Illegal move allowed", move.playerMove("c4a2", board));
+        assertFalse("Illegal move allowed", move.playerMove("c4d5", board));
+        assertFalse("Illegal move allowed", move.playerMove("c4f5", board));
+        assertFalse("Illegal move allowed", move.playerMove("c4c6", board));
+        assertFalse("Illegal move allowed", move.playerMove("c4e4", board));
+        assertFalse("Allowed to move over own piece", move.playerMove("c4b2", board));
+        assertFalse("White allowed to move black knight", move.playerMove("c5b3", board));
+        assertTrue("Not allowed to take enemy piece", move.playerMove("c4d2", board));
+        assertFalse("Illegal move allowed", move.playerMove("c5a7", board));
+        assertFalse("Illegal move allowed", move.playerMove("c5d6", board));
+        assertFalse("Illegal move allowed", move.playerMove("c5f6", board));
+        assertFalse("Illegal move allowed", move.playerMove("c5c3", board));
+        assertFalse("Illegal move allowed", move.playerMove("c5e5", board));
+        assertFalse("Allowed to move over own piece", move.playerMove("c5b7", board));
+        assertFalse("Black allowed to move white knight", move.playerMove("d2c4", board));
+        assertTrue("Not allowed to take enemy piece", move.playerMove("c5d7", board));
+        assertTrue("Legal move not allowed", move.playerMove("d2e4", board));
+        assertTrue("Legal move not allowed", move.playerMove("d7e5", board));
+        assertTrue("Legal move not allowed", move.playerMove("e4c5", board));
+        assertTrue("Legal move not allowed", move.playerMove("e5c4", board));
+        assertTrue("Legal move not allowed", move.playerMove("c5e6", board));
+        assertTrue("Legal move not allowed", move.playerMove("c4e3", board));
     }
 
     @Test
@@ -123,6 +127,8 @@ public class TestMove {
         gameboard[1][6] = 1;
         gameboard[2][6] = -1;
         Board board = new Board(gameboard, true);
+        board.whitekingpos = new int[]{4,0};
+        board.blackkingpos = new int[]{4,0};
         Move move = new Move();
         assertFalse("Illegal move allowed", move.playerMove("b2a2", board));
         assertFalse("Illegal move allowed", move.playerMove("c2d2", board));
@@ -172,6 +178,8 @@ public class TestMove {
         gameboard[4][4] = -1;
         gameboard[3][4] = 1;
         Board board = new Board(gameboard, true);
+        board.whitekingpos = new int[]{3,7};
+        board.blackkingpos = new int[]{3,7};
         Move move = new Move();
         assertTrue("Legal move not allowed", move.playerMove("b2e5", board));
         assertTrue("Legal move not allowed", move.playerMove("b7e4", board));
@@ -182,16 +190,13 @@ public class TestMove {
     @Test
     public void testKingMoves() {
         int[][] gameboard = new int[8][8];
-        gameboard[1][1] = 3;
-        gameboard[0][7] = -3;
-        gameboard[7][0] = -2;
+        gameboard[7][4] = -6;
+        gameboard[7][0] = 2;
         gameboard[7][7] = -2;
-        gameboard[2][0] = 1;
-        gameboard[5][7] = -1;
-        gameboard[1][0] = 1;
         Board board = new Board(gameboard, true);
         Move move = new Move();
 
+        assertFalse(move.playerMove("h1h2", board));
     }
 
     @Test
@@ -300,7 +305,7 @@ public class TestMove {
         gameboard[7][0] = -2;
         gameboard[0][7] = 4;
         board = new Board(gameboard, true);
-        assertTrue(move.playerMove("e1a1", board));
+        assertTrue("" + board.blackkingpos[0] + " " + board.blackkingpos[1], move.playerMove("e1a1", board));
 
         gameboard = new int[8][8];
         gameboard[7][4] = -6;
