@@ -8,6 +8,14 @@ plugins {
 
 version '1.0-SNAPSHOT'
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'chess.Game'
+        )
+    }
+}
+
 sourceCompatibility = 1.8
 
 checkstyle {

@@ -7,6 +7,8 @@
 
 [Implementation document](https://github.com/Sieluton/chessAI/blob/master/documentation/implementation%20document.md)
 
+[User manual](https://github.com/Sieluton/chessAI/blob/master/documentation/user%20manual.md)
+
 ## Weekly reports
 
 [Week 2](https://github.com/Sieluton/chessAI/blob/master/documentation/weekly%20reports/week%202.md)

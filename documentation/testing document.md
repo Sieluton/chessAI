@@ -1,22 +1,26 @@
 # Unit testing
 Almost all of the testing is done with Unit tests.
-
-Test coverage is really bad but it doesn't really reflect the truth.
+Test coverage is good and most cases are tested.
 
 ## Piece rules
 
-Some tests made to test if moves get right response from MoveValidator.
-
-Pawn rules have pretty good coverage here. I might add more for other pieces.
+MoveValidator is used to test these since it gives information is move legal for specific piece.
 
 ## Piece moves
 
-Tested mostly by playing the game and testing if moves given were played.
+Most legal moves have been tested.
+Tests cover some illegal moves to check that they are not allowed.
 
-All moves have been tested to work properly.
+## Move generation
 
-Tests cover some illegal moves.
+Tests are made by giving specific board and checking how many moves it generated and then comparing it to the real value of legal moves that have been counted by hand.
+
+## Queue data structure
+
+Tested that empty queue returns true when asked if empty. Also adding and taking from queue is tested.
 
 # Manual testing
 
-Board doesn't really need testing since it's working as intended. Also it is pretty simple and problems in it would be spotted since game wouldn't work correctly.
+Most of the testing is done with unit tests.
+
+Some of the boards functionality is tested in other parts of unit tests and biggest part in board that is not tested is toString which should be noticed if giving wrong output.
