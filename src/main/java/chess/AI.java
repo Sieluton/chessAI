@@ -41,7 +41,7 @@ public class AI {
                 }
             }
         }
-        //System.out.println("Move evaluation " + value);
+        System.out.println("Move evaluation " + value);
         //System.out.println("Amount of pruned moves " + pruned);
         return best;
     }
