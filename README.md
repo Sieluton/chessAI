@@ -1,5 +1,7 @@
 # Chess chess.AI
 
+[Release](https://github.com/Sieluton/chessAI/releases/tag/1.0)
+
 ## Documentation
 [Specification document](https://github.com/Sieluton/chessAI/blob/master/documentation/specification%20document.md)
 
