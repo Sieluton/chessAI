@@ -15,7 +15,7 @@ public class MoveGenerator {
      * @param board Board object that stores game state
      * @return Queue of legal moves
      */
-    public MyQueue generateMoves(Board board){
+    public MyQueue generateMoves(Board board) {
         int[][] game = board.getBoard();
         int[] move = new int[4];
         for (int y = 0; y < game.length; y++) {
@@ -121,7 +121,7 @@ public class MoveGenerator {
 
             x2 = x - 1;
             y2 = y + 1;
-            if (!moveOutOfBounds(x2, y2)){
+            if (!moveOutOfBounds(x2, y2)) {
                 if (validator.isValidMove(new Move(new int[]{x, y, x2, y2}), board)) {
                     queue.add(new Move(new int[]{x, y, x2, y2}));
                 }
@@ -129,7 +129,7 @@ public class MoveGenerator {
 
             x2 = x + 1;
             y2 = y + 1;
-            if (!moveOutOfBounds(x2, y2)){
+            if (!moveOutOfBounds(x2, y2)) {
                 if (validator.isValidMove(new Move(new int[]{x, y, x2, y2}), board)) {
                     queue.add(new Move(new int[]{x, y, x2, y2}));
                 }
@@ -149,56 +149,56 @@ public class MoveGenerator {
 
         x2 = x + 1;
         y2 = y + 2;
-        if (!moveOutOfBounds(x2, y2)){
+        if (!moveOutOfBounds(x2, y2)) {
             if (validator.isValidMove(new Move(new int[]{x, y, x2, y2}), board)) {
                 queue.add(new Move(new int[]{x, y, x2, y2}));
             }
         }
         x2 = x + 1;
         y2 = y - 2;
-        if (!moveOutOfBounds(x2, y2)){
+        if (!moveOutOfBounds(x2, y2)) {
             if (validator.isValidMove(new Move(new int[]{x, y, x2, y2}), board)) {
                 queue.add(new Move(new int[]{x, y, x2, y2}));
             }
         }
         x2 = x - 1;
         y2 = y + 2;
-        if (!moveOutOfBounds(x2, y2)){
+        if (!moveOutOfBounds(x2, y2)) {
             if (validator.isValidMove(new Move(new int[]{x, y, x2, y2}), board)) {
                 queue.add(new Move(new int[]{x, y, x2, y2}));
             }
         }
         x2 = x - 1;
         y2 = y - 2;
-        if (!moveOutOfBounds(x2, y2)){
+        if (!moveOutOfBounds(x2, y2)) {
             if (validator.isValidMove(new Move(new int[]{x, y, x2, y2}), board)) {
                 queue.add(new Move(new int[]{x, y, x2, y2}));
             }
         }
         x2 = x + 2;
         y2 = y + 1;
-        if (!moveOutOfBounds(x2, y2)){
+        if (!moveOutOfBounds(x2, y2)) {
             if (validator.isValidMove(new Move(new int[]{x, y, x2, y2}), board)) {
                 queue.add(new Move(new int[]{x, y, x2, y2}));
             }
         }
         x2 = x + 2;
         y2 = y - 1;
-        if (!moveOutOfBounds(x2, y2)){
+        if (!moveOutOfBounds(x2, y2)) {
             if (validator.isValidMove(new Move(new int[]{x, y, x2, y2}), board)) {
                 queue.add(new Move(new int[]{x, y, x2, y2}));
             }
         }
         x2 = x - 2;
         y2 = y + 1;
-        if (!moveOutOfBounds(x2, y2)){
+        if (!moveOutOfBounds(x2, y2)) {
             if (validator.isValidMove(new Move(new int[]{x, y, x2, y2}), board)) {
                 queue.add(new Move(new int[]{x, y, x2, y2}));
             }
         }
         x2 = x - 2;
         y2 = y - 1;
-        if (!moveOutOfBounds(x2, y2)){
+        if (!moveOutOfBounds(x2, y2)) {
             if (validator.isValidMove(new Move(new int[]{x, y, x2, y2}), board)) {
                 queue.add(new Move(new int[]{x, y, x2, y2}));
             }
@@ -272,8 +272,8 @@ public class MoveGenerator {
         int y2 = 0;
         int length = board.getBoard().length;
         for (int i = 1; i < length; i++) {
-            if ((x + i >= length) ||
-                    (y + i >= length)) {
+            if ((x + i >= length)
+                    || (y + i >= length)) {
                 break;
             }
             x2 = x + i;
@@ -288,8 +288,8 @@ public class MoveGenerator {
         }
 
         for (int i = 1; i < length; i++) {
-            if ((x + i >= length) ||
-                    (y - i < 0)) {
+            if ((x + i >= length)
+                    || (y - i < 0)) {
                 break;
             }
             x2 = x + i;
@@ -304,8 +304,8 @@ public class MoveGenerator {
         }
 
         for (int i = 1; i < length; i++) {
-            if ((x - i < 0) ||
-                    (y + i >= length)) {
+            if ((x - i < 0)
+                    || (y + i >= length)) {
                 break;
             }
             x2 = x - i;
@@ -320,8 +320,8 @@ public class MoveGenerator {
         }
 
         for (int i = 1; i < length; i++) {
-            if ((x - i < 0) ||
-                    (y - i < 0)) {
+            if ((x - i < 0)
+                    || (y - i < 0)) {
                 break;
             }
             x2 = x - i;

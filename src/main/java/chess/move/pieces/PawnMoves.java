@@ -58,10 +58,10 @@ public class PawnMoves {
         //Make promotion for white pawn
         if (board.getWhitetomove()) { //Check is it whites turn
             game[move.getMove()[1]][move.getMove()[0]] = 0; //Empty start square
-            game[move.getMove()[3]][move.getMove()[2]] = 0 - move.getPromoteTo(); //Set end square to piece you want
+            game[move.getMove()[3]][move.getMove()[2]] = 0 - move.getPromoteTo();
         } else {
             game[move.getMove()[1]][move.getMove()[0]] = 0; //Empty start square
-            game[move.getMove()[3]][move.getMove()[2]] = move.getPromoteTo(); //Set end square to piece you want
+            game[move.getMove()[3]][move.getMove()[2]] = move.getPromoteTo();
         }
         board.setBoard(game); //Make edited chessboard to current chessboard
     }
@@ -73,7 +73,7 @@ public class PawnMoves {
      */
     public void move(Move move, Board board) {
         int[][] game = board.getBoard(); //Store chessboard to edit
-        game[move.getMove()[3]][move.getMove()[2]] = game[move.getMove()[1]][move.getMove()[0]]; //Copy start square to end square
+        game[move.getMove()[3]][move.getMove()[2]] = game[move.getMove()[1]][move.getMove()[0]];
         game[move.getMove()[1]][move.getMove()[0]] = 0; //Empty start square
         board.setBoard(game); //Make edited chessboard to current chessboard
     }
@@ -89,15 +89,15 @@ public class PawnMoves {
         if (board.getWhitetomove()) { //Check is it whites turn
             game[move.getMove()[1]][move.getMove()[0]] = 0; //Empty start square
             game[move.getMove()[3]][move.getMove()[2]] = -1; //Set end square as white pawn
-            game[move.getMove()[3] + 1][move.getMove()[2]] = -7; //Set square in between start and end square as shadow value for black en passant
-            board.setEnpassant(board.getEnpassant() + 1); //Add one amount of en passant shadow values so it can be removed when it's legal move anymore
+            game[move.getMove()[3] + 1][move.getMove()[2]] = -7;
+            board.setEnpassant(board.getEnpassant() + 1);
         }
         //Make double move for black pawn
         else {
             game[move.getMove()[1]][move.getMove()[0]] = 0; //Empty start square
             game[move.getMove()[3]][move.getMove()[2]] = 1; //Set end square as black pawn
-            game[move.getMove()[3] - 1][move.getMove()[2]] = 7; //Set square in between start and end square as shadow value for white en passant
-            board.setEnpassant(board.getEnpassant() + 1); //Add one amount of en passant shadow values so it can be removed when it's not legal move anymore
+            game[move.getMove()[3] - 1][move.getMove()[2]] = 7;
+            board.setEnpassant(board.getEnpassant() + 1);
         }
         board.setBoard(game); //Make edited chessboard to current chessboard
     }

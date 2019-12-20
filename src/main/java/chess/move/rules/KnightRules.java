@@ -15,8 +15,8 @@ public class KnightRules {
      * @return True if move is valid
      */
     public boolean isValidMove(Move move, Board board) {
-        int startsquare = board.getBoard()[move.getMove()[1]][move.getMove()[0]]; //Stores value of start square
-        int endsquare = board.getBoard()[move.getMove()[3]][move.getMove()[2]]; //Stores value of end square
+        int startsquare = board.getBoard()[move.getMove()[1]][move.getMove()[0]];
+        int endsquare = board.getBoard()[move.getMove()[3]][move.getMove()[2]];
         //Check that start square is white knight and end square is empty or black piece
         if (board.getWhitetomove() && //Check is it whites turn
                 startsquare == -3 && //Check does start square contain white knight
@@ -52,8 +52,8 @@ public class KnightRules {
      * @return True if move is legal
      */
     public boolean moveCorrectAmount(Move move) {
-        int a = math.abs(move.getMove()[0] - move.getMove()[2]); //Store absolute value of subtraction of start square x and end square x
-        int b = math.abs(move.getMove()[1] - move.getMove()[3]); //Store absolute value of subtraction of start square y and end square y
+        int a = math.abs(move.getMove()[0] - move.getMove()[2]);
+        int b = math.abs(move.getMove()[1] - move.getMove()[3]);
         //True if moves 2 steps in one axis and 1 step in other axis
         if ((a == 2 && b == 1) || (a == 1 && b == 2)) {
             return true;

@@ -15,8 +15,8 @@ public class KingRules {
      * @return True if move is valid
      */
     public boolean isValidMove(Move move, Board board) {
-        int startsquare = board.getBoard()[move.getMove()[1]][move.getMove()[0]]; //Stores value of start square
-        int endsquare = board.getBoard()[move.getMove()[3]][move.getMove()[2]]; //Stores value of end square
+        int startsquare = board.getBoard()[move.getMove()[1]][move.getMove()[0]];
+        int endsquare = board.getBoard()[move.getMove()[3]][move.getMove()[2]];
         //Check that start square is white king and end square is empty, black piece or own rook
         if (board.getWhitetomove() && //Check is it whites turn
                 startsquare == -6 && //Check does start square contain white king
@@ -44,9 +44,9 @@ public class KingRules {
         if (isCastling(move, board)) {
             return true;
         }
-        if ((movex == 1 || movex == 0) &&
-                (movey == 1 || movey == 0) &&
-        !isSquareUnderAttack(board, move.getMove()[2], move.getMove()[3])) {
+        if ((movex == 1 || movex == 0)
+                && (movey == 1 || movey == 0)
+                && !isSquareUnderAttack(board, move.getMove()[2], move.getMove()[3])) {
             return true;
         }
         return false;
@@ -62,27 +62,27 @@ public class KingRules {
         int x = move.getMove()[0];
         int y = move.getMove()[1];
         int endsquare = board.getBoard()[move.getMove()[3]][move.getMove()[2]];
-        if (board.getWhitetomove() &&
-                !board.isWhitekingmoved() &&
-                endsquare == -2) {
-            if (move.getMove()[2] == 0 &&
-                    !board.isWhiteleftrookmoved()) {
+        if (board.getWhitetomove()
+                && !board.isWhitekingmoved()
+                && endsquare == -2) {
+            if (move.getMove()[2] == 0
+                    && !board.isWhiteleftrookmoved()) {
                 return checkSquaresCastling(board, x, y, true);
             }
-            if (move.getMove()[2] == 7 &&
-                    !board.isWhiterightrookmoved()) {
+            if (move.getMove()[2] == 7
+                    && !board.isWhiterightrookmoved()) {
                 return checkSquaresCastling(board, x, y, false);
             }
         }
-        if (!board.getWhitetomove() &&
-                !board.isBlackkingmoved() &&
-                endsquare == 2) {
-            if (move.getMove()[2] == 0 &&
-                    !board.isBlackleftrookmoved()) {
+        if (!board.getWhitetomove()
+                && !board.isBlackkingmoved()
+                && endsquare == 2) {
+            if (move.getMove()[2] == 0
+                    && !board.isBlackleftrookmoved()) {
                 return checkSquaresCastling(board, x, y, true);
             }
-            if (move.getMove()[2] == 7 &&
-                    !board.isBlackrightrookmoved()) {
+            if (move.getMove()[2] == 7
+                    && !board.isBlackrightrookmoved()) {
                 return checkSquaresCastling(board, x, y, false);
             }
         }
@@ -100,25 +100,25 @@ public class KingRules {
     public boolean checkSquaresCastling(Board board, int x, int y, boolean left) {
         int[][] game = board.getBoard();
         if (left) {
-            if (game[y][x - 1] != 0 ||
-                    game[y][x - 2] != 0 ||
-                    game[y][x - 3] != 0) {
+            if (game[y][x - 1] != 0
+                    || game[y][x - 2] != 0
+                    || game[y][x - 3] != 0) {
                 return false;
             }
-            if (isSquareUnderAttack(board, x, y) ||
-                    isSquareUnderAttack(board, x - 1, y) ||
-                    isSquareUnderAttack(board, x - 2, y)) {
+            if (isSquareUnderAttack(board, x, y)
+                    || isSquareUnderAttack(board, x - 1, y)
+                    || isSquareUnderAttack(board, x - 2, y)) {
                 return false;
             }
         }
         else {
-            if (game[y][x + 1] != 0 ||
-                    game[y][x + 2] != 0) {
+            if (game[y][x + 1] != 0
+                    || game[y][x + 2] != 0) {
                 return false;
             }
-            if (isSquareUnderAttack(board, x, y) ||
-                    isSquareUnderAttack(board, x + 1, y) ||
-                    isSquareUnderAttack(board, x + 2, y)) {
+            if (isSquareUnderAttack(board, x, y)
+                    || isSquareUnderAttack(board, x + 1, y)
+                    || isSquareUnderAttack(board, x + 2, y)) {
                 return false;
             }
         }
@@ -133,9 +133,9 @@ public class KingRules {
      * @return True if given square is under attack
      */
     public boolean isSquareUnderAttack(Board board, int x, int y) {
-        if (isSquareUnderAttackDiagonal(board, x, y) ||
-                isSquareUnderAttackSingleAxis(board, x, y) ||
-                isSquareUnderAttackKnight(board, x, y)) {
+        if (isSquareUnderAttackDiagonal(board, x, y)
+                || isSquareUnderAttackSingleAxis(board, x, y)
+                || isSquareUnderAttackKnight(board, x, y)) {
             return true;
         }
         return false;
@@ -154,9 +154,9 @@ public class KingRules {
         //Checks if square under attack by queen or rook
         for (int i = 1; y + i < game.length; i++) {
             square = game[y + i][x];
-            if (square == 0 ||
-                    (board.getWhitetomove() && square == -6) ||
-                    (!board.getWhitetomove() && square == 6)) {
+            if (square == 0
+                    || (board.getWhitetomove() && square == -6)
+                    || (!board.getWhitetomove() && square == 6)) {
                 continue;
             }
             if (checkSingleAxisForThreat(board, square, i)) {
@@ -167,9 +167,9 @@ public class KingRules {
 
         for (int i = 1; x + i < game.length; i++) {
             square = game[y][x + i];
-            if (square == 0 ||
-                    (board.getWhitetomove() && square == -6) ||
-                    (!board.getWhitetomove() && square == 6)) {
+            if (square == 0
+                    || (board.getWhitetomove() && square == -6)
+                    || (!board.getWhitetomove() && square == 6)) {
                 continue;
             }
             if (checkSingleAxisForThreat(board, square, i)) {
@@ -180,9 +180,9 @@ public class KingRules {
 
         for (int i = 1; y - i >= 0; i++) {
             square = game[y - i][x];
-            if (square == 0 ||
-                    (board.getWhitetomove() && square == -6) ||
-                    (!board.getWhitetomove() && square == 6)) {
+            if (square == 0
+                    || (board.getWhitetomove() && square == -6)
+                    || (!board.getWhitetomove() && square == 6)) {
                 continue;
             }
             if (checkSingleAxisForThreat(board, square, i)) {
@@ -193,9 +193,9 @@ public class KingRules {
 
         for (int i = 1; x - i >= 0; i++) {
             square = game[y][x - i];
-            if (square == 0 ||
-                    (board.getWhitetomove() && square == -6) ||
-                    (!board.getWhitetomove() && square == 6)) {
+            if (square == 0
+                    || (board.getWhitetomove() && square == -6)
+                    || (!board.getWhitetomove() && square == 6)) {
                 continue;
             }
             if (checkSingleAxisForThreat(board, square, i)) {
@@ -246,9 +246,9 @@ public class KingRules {
         for (int i = 1; y + i < game.length; i++) {
             if (x + i < game.length) {
                 square = game[y + i][x + i];
-                if (square == 0 ||
-                        (board.getWhitetomove() && square == -6) ||
-                        (!board.getWhitetomove() && square == 6)) {
+                if (square == 0
+                        || (board.getWhitetomove() && square == -6)
+                        || (!board.getWhitetomove() && square == 6)) {
                     continue;
                 }
                 if (checkDiagonalSquareForThreat(board, square, i, true)) {
@@ -262,9 +262,9 @@ public class KingRules {
         for (int i = 1; y + i < game.length; i++) {
             if (x - i >= 0) {
                 square = game[y + i][x - i];
-                if (square == 0 ||
-                        (board.getWhitetomove() && square == -6) ||
-                        (!board.getWhitetomove() && square == 6)) {
+                if (square == 0
+                        || (board.getWhitetomove() && square == -6)
+                        || (!board.getWhitetomove() && square == 6)) {
                     continue;
                 }
                 else if (checkDiagonalSquareForThreat(board, square, i, true)) {
@@ -278,9 +278,9 @@ public class KingRules {
         for (int i = 1; y - i >= 0; i++) {
             if (x + i < game.length) {
                 square = game[y - i][x + i];
-                if (square == 0 ||
-                        (board.getWhitetomove() && square == -6) ||
-                        (!board.getWhitetomove() && square == 6)) {
+                if (square == 0
+                        || (board.getWhitetomove() && square == -6)
+                        || (!board.getWhitetomove() && square == 6)) {
                     continue;
                 }
                 else if (checkDiagonalSquareForThreat(board, square, i, false)) {
@@ -294,9 +294,9 @@ public class KingRules {
         for (int i = 1; y - i >= 0; i++) {
             if (x - i >= 0) {
                 square = game[y - i][x - i];
-                if (square == 0 ||
-                        (board.getWhitetomove() && square == -6) ||
-                        (!board.getWhitetomove() && square == 6)) {
+                if (square == 0
+                        || (board.getWhitetomove() && square == -6)
+                        || (!board.getWhitetomove() && square == 6)) {
                     continue;
                 }
                 else if (checkDiagonalSquareForThreat(board, square, i, false)) {

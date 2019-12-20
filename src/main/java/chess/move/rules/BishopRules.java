@@ -15,7 +15,7 @@ public class BishopRules {
      * @return True if move is valid
      */
     public boolean isValidMove(Move move, Board board) {
-        int startsquare = board.getBoard()[move.getMove()[1]][move.getMove()[0]]; //Stores value of start square
+        int startsquare = board.getBoard()[move.getMove()[1]][move.getMove()[0]];
         int endsquare = board.getBoard()[move.getMove()[3]][move.getMove()[2]]; //Stores value of end square
         //Check that start square is white bishop and end square is empty or black piece
         if (board.getWhitetomove() && //Check is it whites turn
@@ -39,8 +39,8 @@ public class BishopRules {
      * @return True if move is allowed
      */
     public boolean moveCheck(Move move, Board board) {
-        int x = math.abs(move.getMove()[0] - move.getMove()[2]); //Store absolute value of subtraction of start square x and end square x
-        int y = math.abs(move.getMove()[1] - move.getMove()[3]); //Store absolute value of subtraction of start square y and end square y
+        int x = math.abs(move.getMove()[0] - move.getMove()[2]);
+        int y = math.abs(move.getMove()[1] - move.getMove()[3]);
         //If piece is not moving diagonal it is valid move and return false
         if (x != y) {
             return false;

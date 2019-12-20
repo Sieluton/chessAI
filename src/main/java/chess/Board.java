@@ -358,7 +358,7 @@ public class Board {
      * @return True if game has ended
      */
     public boolean hasGameEnded() {
-        if (!isLegalMoves()){
+        if (!isLegalMoves()) {
             return true;
         }
         return false;

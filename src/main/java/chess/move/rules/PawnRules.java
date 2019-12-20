@@ -15,8 +15,8 @@ public class PawnRules {
      * @return True if move is valid
      */
     public boolean isValidMove(Move move, Board board) {
-        int startsquare = board.getBoard()[move.getMove()[1]][move.getMove()[0]]; //Stores value of start square
-        int endsquare = board.getBoard()[move.getMove()[3]][move.getMove()[2]]; //Stores value of end square
+        int startsquare = board.getBoard()[move.getMove()[1]][move.getMove()[0]];
+        int endsquare = board.getBoard()[move.getMove()[3]][move.getMove()[2]];
         //Check that start square is white pawn and end square is empty or black piece
         if (board.getWhitetomove() && //Check is it whites turn
                 startsquare == -1 && //Check does start square contain white pawn
@@ -102,14 +102,14 @@ public class PawnRules {
         if (board.getWhitetomove() && //Check is it whites turn
                 move.getMove()[1] - move.getMove()[3] == 1 && //Check that moves 1 step forward in y-axis
                 move.getMove()[0] == move.getMove()[2] && //Check that x-axis doesn't change
-                board.getBoard()[move.getMove()[3]][move.getMove()[2]] == 0) { //Check that end square is empty
+                board.getBoard()[move.getMove()[3]][move.getMove()[2]] == 0) {
             return true;
         }
         //If black pawn tries to move one step forward in y-axis and the square is empty return true
         else if (!board.getWhitetomove() && //Check is it blacks turn
                 move.getMove()[1] - move.getMove()[3] == -1 && //Check that moves 1 step forward in y-axis
                 move.getMove()[0] == move.getMove()[2] && //Check that x-axis doesn't change
-                board.getBoard()[move.getMove()[3]][move.getMove()[2]] == 0) { //Check that end square is empty
+                board.getBoard()[move.getMove()[3]][move.getMove()[2]] == 0) {
             return true;
         }
         return false;
@@ -126,18 +126,18 @@ public class PawnRules {
         if (board.getWhitetomove() && //Check is it whites turn
                 move.getMove()[1] - move.getMove()[3] == 2 && //Check that moves 2 steps forward in y-axis
                 move.getMove()[0] == move.getMove()[2] && //Check that x-axis doesn't change
-                board.getBoard()[move.getMove()[3]][move.getMove()[2]] == 0 && //Check that end square is empty
-                board.getBoard()[move.getMove()[3] + 1][move.getMove()[2]] == 0 && //Check that square in middle of move is empty
-                move.getMove()[1] == 6) { //Check that pawn is still in starting square
+                board.getBoard()[move.getMove()[3]][move.getMove()[2]] == 0
+                && board.getBoard()[move.getMove()[3] + 1][move.getMove()[2]] == 0
+                && move.getMove()[1] == 6) { //Check that pawn is still in starting square
             return true;
         }
         //Check is black pawn in 7th row and not blocked to move 2 steps forward
         else if (!board.getWhitetomove() && //Check is it blacks turn
                 move.getMove()[1] - move.getMove()[3] == -2 && //Check that moves 2 steps forward in y-axis
                 move.getMove()[0] == move.getMove()[2] && //Check that x-axis doesn't change
-                board.getBoard()[move.getMove()[3]][move.getMove()[2]] == 0 && //Check that end square is empty
-                board.getBoard()[move.getMove()[3] - 1][move.getMove()[2]] == 0 && //Check that square in middle of move is empty
-                move.getMove()[1] == 1) { //Check that pawn is still in starting square
+                board.getBoard()[move.getMove()[3]][move.getMove()[2]] == 0
+                && board.getBoard()[move.getMove()[3] - 1][move.getMove()[2]] == 0
+                && move.getMove()[1] == 1) { //Check that pawn is still in starting square
             return true;
         }
         return false;
@@ -154,15 +154,15 @@ public class PawnRules {
         //Check is there a black piece that is one step forward and either left or right side of white pawn
         if (board.getWhitetomove() && //Check is it whites turn
                 move.getMove()[1] - move.getMove()[3] == 1 && //Check is move 1 step forward in y-axis
-                math.abs(move.getMove()[0] - move.getMove()[2]) == 1 && //Check is move 1 step to left or right
-                endsquare >= 1) { //Check is end square black piece
+                math.abs(move.getMove()[0] - move.getMove()[2]) == 1
+                && endsquare >= 1) { //Check is end square black piece
             return true;
         }
         //Check is there a white piece that is one step forward and either left or right side of black pawn
         else if (!board.getWhitetomove() && //Check is it blacks turn
                 move.getMove()[1] - move.getMove()[3] == -1 && //Check is move 1 step forward in y-axis
-                math.abs(move.getMove()[0] - move.getMove()[2]) == 1 && //Check is move 1 step to left or right
-                endsquare <= -1) { //Check is end square white piece
+                math.abs(move.getMove()[0] - move.getMove()[2]) == 1
+                && endsquare <= -1) { //Check is end square white piece
             return true;
         }
         return false;

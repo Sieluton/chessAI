@@ -13,8 +13,8 @@ public class RookRules {
      * @return True if move is valid
      */
     public boolean isValidMove(Move move, Board board) {
-        int startsquare = board.getBoard()[move.getMove()[1]][move.getMove()[0]]; //Stores value of start square
-        int endsquare = board.getBoard()[move.getMove()[3]][move.getMove()[2]]; //Stores value of end square
+        int startsquare = board.getBoard()[move.getMove()[1]][move.getMove()[0]];
+        int endsquare = board.getBoard()[move.getMove()[3]][move.getMove()[2]];
         //Check that start square is white rook and end square is empty or black piece
         if (board.getWhitetomove() && //Check is it whites turn
                 startsquare == -2 && //Check does start square contain white rook

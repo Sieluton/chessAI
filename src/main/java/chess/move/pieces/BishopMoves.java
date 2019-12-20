@@ -22,7 +22,7 @@ public class BishopMoves {
      */
     public void move(Move move, Board board) {
         int[][] game = board.getBoard(); //Store chessboard to edit
-        game[move.getMove()[3]][move.getMove()[2]] = game[move.getMove()[1]][move.getMove()[0]]; //Copy start square to end square
+        game[move.getMove()[3]][move.getMove()[2]] = game[move.getMove()[1]][move.getMove()[0]];
         game[move.getMove()[1]][move.getMove()[0]] = 0; //Empty start square
         board.setBoard(game); //Make edited chessboard to current chessboard
     }

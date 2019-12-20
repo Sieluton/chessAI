@@ -298,7 +298,7 @@ public class TestMove {
     @Test
     public void testCastlingDiagonals() {
         int[][] gameboard = new int[8][8];
-        Board board = new Board(gameboard, true);
+        Board board;
         Move move = new Move();
 
         gameboard = new int[8][8];

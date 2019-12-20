@@ -18,7 +18,7 @@ public class KingMoves {
         } else {
             move(move, board);
         }
-        if (board.getWhitetomove()){
+        if (board.getWhitetomove()) {
             board.setWhitekingmoved(true);
         } else {
             board.setBlackkingmoved(true);
@@ -33,7 +33,7 @@ public class KingMoves {
      */
     public void move(Move move, Board board) {
         int[][] game = board.getBoard(); //Store chessboard to edit
-        game[move.getMove()[3]][move.getMove()[2]] = game[move.getMove()[1]][move.getMove()[0]]; //Copy start square to end square
+        game[move.getMove()[3]][move.getMove()[2]] = game[move.getMove()[1]][move.getMove()[0]];
         game[move.getMove()[1]][move.getMove()[0]] = 0; //Empty start square
         board.setBoard(game); //Make edited chessboard to current chessboard
         updateKingPos(board, move.getMove()[2], move.getMove()[3]);
@@ -46,7 +46,7 @@ public class KingMoves {
      */
     public void castling(Move move, Board board) {
         int[][] game = board.getBoard();
-        if (move.getMove()[2] == 0){
+        if (move.getMove()[2] == 0) {
             game[move.getMove()[1]][move.getMove()[0] - 2] = game[move.getMove()[1]][move.getMove()[0]];
             game[move.getMove()[1]][move.getMove()[0] - 1] = game[move.getMove()[3]][move.getMove()[2]];
             updateKingPos(board, move.getMove()[0] - 2, move.getMove()[1]);

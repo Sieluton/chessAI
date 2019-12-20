@@ -107,20 +107,20 @@ public class Move {
      */
     public void rookMovementTracker(Move movement, Board board) {
         int[] move = movement.getMove();
-        if ((move[0] == 0 && move[1] == 0) ||
-                (move[2] == 0 && move[3] == 0)) {
+        if ((move[0] == 0 && move[1] == 0)
+                || (move[2] == 0 && move[3] == 0)) {
             board.setBlackleftrookmoved(true);
         }
-        if ((move[0] == 7 && move[1] == 0) ||
-                (move[2] == 7 && move[3] == 0)) {
+        if ((move[0] == 7 && move[1] == 0)
+                || (move[2] == 7 && move[3] == 0)) {
             board.setBlackrightrookmoved(true);
         }
-        if ((move[0] == 7 && move[1] == 7) ||
-                (move[2] == 7 && move[3] == 7)) {
+        if ((move[0] == 7 && move[1] == 7)
+                || (move[2] == 7 && move[3] == 7)) {
             board.setWhiterightrookmoved(true);
         }
-        if ((move[0] == 0 && move[1] == 7) ||
-                (move[2] == 0 && move[3] == 7)) {
+        if ((move[0] == 0 && move[1] == 7)
+                || (move[2] == 0 && move[3] == 7)) {
             board.setWhiteleftrookmoved(true);
         }
     }
