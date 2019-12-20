@@ -2,14 +2,20 @@ package chess.move;
 
 import chess.Board;
 import chess.move.MoveValidator;
+import chess.structures.MyQueue;
 
 import java.util.ArrayDeque;
 
 public class MoveGenerator {
     public MoveValidator validator = new MoveValidator();
-    public ArrayDeque<Move> queue = new ArrayDeque<>();
+    public MyQueue queue = new MyQueue();
 
-    public ArrayDeque<Move> generateMoves(Board board){
+    /**
+     * Used to generate all legal moves on a given chess board
+     * @param board Board object that stores game state
+     * @return Queue of legal moves
+     */
+    public MyQueue generateMoves(Board board){
         int[][] game = board.getBoard();
         int[] move = new int[4];
         for (int y = 0; y < game.length; y++) {
@@ -55,6 +61,12 @@ public class MoveGenerator {
         return this.queue;
     }
 
+    /**
+     * Generates moves for pawn in given position on board
+     * @param board Board object that stores game state
+     * @param x position on x-axis of pawn which moves you want to generate
+     * @param y position on y-axis of pawn which moves you want to generate
+     */
     public void generatePawnMoves(Board board, int x, int y) {
         int[][] game = board.getBoard();
         int x2 = 0;
@@ -125,6 +137,12 @@ public class MoveGenerator {
         }
     }
 
+    /**
+     * Generates moves for knight in given position on board
+     * @param board Board object that stores game state
+     * @param x position on x-axis of knight which moves you want to generate
+     * @param y position on y-axis of knight which moves you want to generate
+     */
     public void generateKnightMoves(Board board, int x, int y) {
         int x2 = 0;
         int y2 = 0;
@@ -187,6 +205,12 @@ public class MoveGenerator {
         }
     }
 
+    /**
+     * Generates moves for rook in given position on board
+     * @param board Board object that stores game state
+     * @param x position on x-axis of rook which moves you want to generate
+     * @param y position on y-axis of rook which moves you want to generate
+     */
     public void generateRookMoves(Board board, int x, int y) {
         int x2 = 0;
         int y2 = 0;
@@ -237,6 +261,12 @@ public class MoveGenerator {
         }
     }
 
+    /**
+     * Generates moves for bishop in given position on board
+     * @param board Board object that stores game state
+     * @param x position on x-axis of bishop which moves you want to generate
+     * @param y position on y-axis of bishop which moves you want to generate
+     */
     public void generateBishopMoves(Board board, int x, int y) {
         int x2 = 0;
         int y2 = 0;
@@ -306,11 +336,23 @@ public class MoveGenerator {
         }
     }
 
+    /**
+     * Generates moves for queen in given position on board
+     * @param board Board object that stores game state
+     * @param x position on x-axis of queen which moves you want to generate
+     * @param y position on y-axis of queen which moves you want to generate
+     */
     public void generateQueenMoves(Board board, int x, int y) {
         generateRookMoves(board, x,  y);
         generateBishopMoves(board, x, y);
     }
 
+    /**
+     * Generates moves for king in given position on board
+     * @param board Board object that stores game state
+     * @param x position on x-axis of king which moves you want to generate
+     * @param y position on y-axis of king which moves you want to generate
+     */
     public void generateKingMoves(Board board, int x, int y) {
         int x2 = 0;
         int y2 = 0;
@@ -393,11 +435,17 @@ public class MoveGenerator {
         }
     }
 
-    public boolean moveOutOfBounds(int x2, int y2) {
-        if (x2 < 0 || x2 > 7) {
+    /**
+     * Checks if given coordinates point outside of board
+     * @param x coordinate in x-axis
+     * @param y coordinate in y-axis
+     * @return True if move is out of bounds
+     */
+    public boolean moveOutOfBounds(int x, int y) {
+        if (x < 0 || x > 7) {
             return true;
         }
-        if (y2 < 0 || y2 > 7) {
+        if (y < 0 || y > 7) {
             return true;
         }
         return false;

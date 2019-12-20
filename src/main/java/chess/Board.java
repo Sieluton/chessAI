@@ -3,9 +3,9 @@ package chess;
 import chess.move.Move;
 import chess.move.MoveGenerator;
 import chess.move.rules.KingRules;
+import chess.structures.MyQueue;
 
 import java.util.ArrayDeque;
-import java.util.Deque;
 
 public class Board {
 
@@ -20,7 +20,7 @@ public class Board {
     public boolean blackrightrookmoved = false;
     public int[] whitekingpos = new int[2];
     public int[] blackkingpos = new int[2];
-    public ArrayDeque<Move> queue;
+    public MyQueue queue;
     public int score = 0;
     public KingRules kingrules = new KingRules();
 

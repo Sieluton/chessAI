@@ -4,6 +4,7 @@ package chess.move;
 
         import chess.Board;
         import chess.move.Move;
+        import chess.structures.MyQueue;
         import org.junit.Test;
 
         import java.util.Deque;
@@ -11,10 +12,10 @@ package chess.move;
 public class TestMoveGenerator {
 
     @Test
-    public void testPawnMoveGeneration(){
+    public void testPawnMoveGeneration() {
         int[][] gameboard;
         Board board;
-        Deque<Move> queue;
+        MyQueue queue;
 
         //Whites moves
         gameboard = new int[8][8];
@@ -25,7 +26,7 @@ public class TestMoveGenerator {
         queue = new MoveGenerator().generateMoves(board);
         assertTrue("" + queue.size(),queue.size() == 4);
         while (!board.queue.isEmpty()){
-            assertTrue(new MoveValidator().isValidMove(board.queue.pop(), board));
+            assertTrue(new MoveValidator().isValidMove((Move) board.queue.pop(), board));
         }
 
 
@@ -38,15 +39,15 @@ public class TestMoveGenerator {
         queue = new MoveGenerator().generateMoves(board);
         assertTrue("" + queue.size(),queue.size() == 4);
         while (!board.queue.isEmpty()){
-            assertTrue(new MoveValidator().isValidMove(board.queue.pop(), board));
+            assertTrue(new MoveValidator().isValidMove((Move) board.queue.pop(), board));
         }
     }
 
     @Test
-    public void testRookMoveGeneration(){
+    public void testRookMoveGeneration() {
         int[][] gameboard;
         Board board;
-        Deque<Move> queue;
+        MyQueue queue;
 
         //Whites moves
         gameboard = new int[8][8];
@@ -55,7 +56,7 @@ public class TestMoveGenerator {
         queue = new MoveGenerator().generateMoves(board);
         assertTrue("" + queue.size(),queue.size() == 14);
         while (!board.queue.isEmpty()){
-            assertTrue(new MoveValidator().isValidMove(board.queue.pop(), board));
+            assertTrue(new MoveValidator().isValidMove((Move) board.queue.pop(), board));
         }
 
         //Blacks moves
@@ -65,15 +66,15 @@ public class TestMoveGenerator {
         queue = new MoveGenerator().generateMoves(board);
         assertTrue("" + queue.size(),queue.size() == 14);
         while (!board.queue.isEmpty()){
-            assertTrue(new MoveValidator().isValidMove(board.queue.pop(), board));
+            assertTrue(new MoveValidator().isValidMove((Move) board.queue.pop(), board));
         }
     }
 
     @Test
-    public void testKnightMoveGeneration(){
+    public void testKnightMoveGeneration() {
         int[][] gameboard;
         Board board;
-        Deque<Move> queue;
+        MyQueue queue;
 
         //Whites moves
         gameboard = new int[8][8];
@@ -82,7 +83,7 @@ public class TestMoveGenerator {
         queue = new MoveGenerator().generateMoves(board);
         assertTrue("" + queue.size(),queue.size() == 8);
         while (!board.queue.isEmpty()){
-            assertTrue(new MoveValidator().isValidMove(board.queue.pop(), board));
+            assertTrue(new MoveValidator().isValidMove((Move) board.queue.pop(), board));
         }
 
         //Blacks moves
@@ -92,15 +93,15 @@ public class TestMoveGenerator {
         queue = new MoveGenerator().generateMoves(board);
         assertTrue("" + queue.size(),queue.size() == 8);
         while (!board.queue.isEmpty()){
-            assertTrue(new MoveValidator().isValidMove(board.queue.pop(), board));
+            assertTrue(new MoveValidator().isValidMove((Move) board.queue.pop(), board));
         }
     }
 
     @Test
-    public void testBishopMoveGeneration(){
+    public void testBishopMoveGeneration() {
         int[][] gameboard;
         Board board;
-        Deque<Move> queue;
+        MyQueue queue;
 
         //Whites moves
         gameboard = new int[8][8];
@@ -109,7 +110,7 @@ public class TestMoveGenerator {
         queue = new MoveGenerator().generateMoves(board);
         assertTrue("" + queue.size(),queue.size() == 13);
         while (!board.queue.isEmpty()){
-            assertTrue(new MoveValidator().isValidMove(board.queue.pop(), board));
+            assertTrue(new MoveValidator().isValidMove((Move) board.queue.pop(), board));
         }
 
         //Blacks moves
@@ -119,15 +120,15 @@ public class TestMoveGenerator {
         queue = new MoveGenerator().generateMoves(board);
         assertTrue("" + queue.size(),queue.size() == 13);
         while (!board.queue.isEmpty()){
-            assertTrue(new MoveValidator().isValidMove(board.queue.pop(), board));
+            assertTrue(new MoveValidator().isValidMove((Move) board.queue.pop(), board));
         }
     }
 
     @Test
-    public void testQueenMoveGeneration(){
+    public void testQueenMoveGeneration() {
         int[][] gameboard;
         Board board;
-        Deque<Move> queue;
+        MyQueue queue;
 
         //Whites moves
         gameboard = new int[8][8];
@@ -136,7 +137,7 @@ public class TestMoveGenerator {
         queue = new MoveGenerator().generateMoves(board);
         assertTrue("" + queue.size(),queue.size() == 27);
         while (!board.queue.isEmpty()){
-            assertTrue(new MoveValidator().isValidMove(board.queue.pop(), board));
+            assertTrue(new MoveValidator().isValidMove((Move) board.queue.pop(), board));
         }
 
         //Blacks moves
@@ -146,15 +147,15 @@ public class TestMoveGenerator {
         queue = new MoveGenerator().generateMoves(board);
         assertTrue("" + queue.size(),queue.size() == 27);
         while (!board.queue.isEmpty()){
-            assertTrue(new MoveValidator().isValidMove(board.queue.pop(), board));
+            assertTrue(new MoveValidator().isValidMove((Move) board.queue.pop(), board));
         }
     }
 
     @Test
-    public void testKingMoveGeneration(){
+    public void testKingMoveGeneration() {
         int[][] gameboard;
         Board board;
-        Deque<Move> queue;
+        MyQueue queue;
 
         //Whites moves
         gameboard = new int[8][8];
@@ -163,7 +164,7 @@ public class TestMoveGenerator {
         queue = new MoveGenerator().generateMoves(board);
         assertTrue("" + queue.size(),queue.size() == 8);
         while (!board.queue.isEmpty()){
-            assertTrue(new MoveValidator().isValidMove(board.queue.pop(), board));
+            assertTrue(new MoveValidator().isValidMove((Move) board.queue.pop(), board));
         }
 
         //Blacks moves
@@ -191,18 +192,18 @@ public class TestMoveGenerator {
         queue = new MoveGenerator().generateMoves(board);
         assertTrue("" + queue.size(),queue.size() == 26);
         while (!board.queue.isEmpty()){
-            assertTrue(new MoveValidator().isValidMove(board.queue.pop(), board));
+            assertTrue(new MoveValidator().isValidMove((Move) board.queue.pop(), board));
         }
     }
     @Test
     public void testNoMoves() {
         int[][] gameboard = new int[8][8];
-        Deque<Move> queue;
+        MyQueue queue;
         Board board = new Board(gameboard, true);
         queue = new MoveGenerator().generateMoves(board);
         assertTrue("" + queue.size(),queue.isEmpty());
         while (!board.queue.isEmpty()){
-            assertTrue(new MoveValidator().isValidMove(board.queue.pop(), board));
+            assertTrue(new MoveValidator().isValidMove((Move) board.queue.pop(), board));
         }
     }
 }
